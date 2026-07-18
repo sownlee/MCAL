@@ -1,0 +1,583 @@
+<?xml version='1.0'?>
+<!--
+/***********************************************************************************************************************
+ * Project Name: HuLa STM
+ *
+ * File Name: #DEV_MODULE_NAME#.xdm
+ *
+ * Description: Implementation of #DEV_MODULE_NAME#
+ *
+ * AutoSAR Version:         4.4.0
+ *
+ * Revision:
+ *              Version         Date                Change History
+ *              0.9.0          23/02/2024           Initial version
+ *
+ **********************************************************************************************************************/
+-->
+<datamodel version="7.0"
+          xmlns="http://www.tresos.de/_projects/DataModel2/16/root.xsd" 
+          xmlns:a="http://www.tresos.de/_projects/DataModel2/16/attribute.xsd" 
+          xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd" 
+          xmlns:d="http://www.tresos.de/_projects/DataModel2/06/data.xsd">
+
+
+  <d:ctr type="AUTOSAR" factory="autosar"
+        xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd" 
+        xmlns:cd="http://www.tresos.de/_projects/DataModel2/08/customdata.xsd" 
+        xmlns:f="http://www.tresos.de/_projects/DataModel2/14/formulaexpr.xsd" 
+        xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd" 
+        xmlns:mt="http://www.tresos.de/_projects/DataModel2/11/multitest.xsd"  
+        xmlns:variant="http://www.tresos.de/_projects/DataModel2/11/variant.xsd">
+
+      <d:lst type="TOP-LEVEL-PACKAGES">
+        <d:ctr name="#M4_HW_RELEASE_NAME#" type="AR-PACKAGE">
+          <d:lst type="ELEMENTS">
+
+            <d:chc name="#DEV_MODULE_NAME#" type="AR-ELEMENT" value="MODULE-DEF">
+              <v:ctr type="MODULE-DEF">
+                
+                <a:a name="ADMIN-DATA" type="ADMIN-DATA">
+                  <ad:ADMIN-DATA>
+                    <ad:DOC-REVISIONS>
+                      <ad:DOC-REVISION>
+                        <ad:REVISION-LABEL>#M4_AUTOSAR_RELEASE_VERSION_MAJOR#.#M4_AUTOSAR_RELEASE_VERSION_MINOR#.#M4_AUTOSAR_RELEASE_VERSION_PATCH#</ad:REVISION-LABEL>
+                        <ad:ISSUED-BY>AUTOSAR</ad:ISSUED-BY>
+                      </ad:DOC-REVISION>
+                    </ad:DOC-REVISIONS>
+                  </ad:ADMIN-DATA>
+                </a:a>
+                
+                <a:a name="DESC" value="EN: Configuration of the System module." />
+                <a:a name="LOWER-MULTIPLICITY" value="1" />
+                <a:a name="UPPER-MULTIPLICITY" value="1" />
+                <a:a name="POSTBUILDVARIANTSUPPORT" value="true" />
+                <a:a name="RELEASE" value="asc:#M4_AUTOSAR_RELEASE_VERSION_MAJOR#.#M4_AUTOSAR_RELEASE_VERSION_MINOR#.#M4_AUTOSAR_RELEASE_VERSION_PATCH#" />
+                <a:a name="UUID" value="ECUC:af42ec2b-ca6a-4adc-b0b9-59a3beba9258" />
+
+                <v:var name="POST_BUILD_VARIANT_USED" type="BOOLEAN">
+                  <a:a name="DESC" value="Indicates whether a module implementation has or plans to have (i.e., introduced at link or post-build time) new post-build variation points." />
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="Link">VariantLinkTime</icc:v>
+                    <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="LABEL" value="Post Build Variant Used" />
+                  <a:a name="ORIGIN" value="EB" />
+                  <a:a name="POSTBUILDVARIANTVALUE" value="true" />
+                  <a:da name="DEFAULT" value="true" />
+                  <a:da name="READONLY" value="FALSE" />
+                  <a:da name="TOOLTIP" value="Indicates whether a module implementation has or plans to have (i.e., introduced at link or post-build time) new post-build variation points." />
+                </v:var>
+                <v:var name="IMPLEMENTATION_CONFIG_VARIANT" type="ENUMERATION">
+                  <a:a name="DESC" value="This parameter defines the configuration variant of the module." />
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantLinkTime</icc:v>
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="LABEL" value="Config Variant" />
+                  <a:da name="DEFAULT" value="VariantPostBuild" />
+                  <a:da name="RANGE">
+                    <a:v>VariantLinkTime</a:v>
+                    <a:v>VariantPostBuild</a:v>
+                    <a:v>VariantPreCompile</a:v>
+                  </a:da>
+                </v:var>
+
+<!-- BEGIN CODE  -->
+
+<!--
+SRS ID:     ECUC_System_HuLa_XXXXX
+Design ID:  SystemGeneral_Object
+-->
+<v:ctr name="SystemGeneral" type="IDENTIFIABLE">
+  <a:a name="DESC" value="EN: This container contains the general configuration for System driver" />
+  <a:a name="UUID" value="ECUC:61c9d545-8e42-42d7-8b19-6355417cfd9f" />
+  <!--
+  SRS ID:     ECUC_System_HuLa_XXXXX
+  Design ID:  SystemDevErrorDetect_Object
+  -->
+  <v:var name="SystemDevErrorDetect" type="BOOLEAN">
+    <a:a name="LABEL" value="System Development Error Detection" />
+    <a:a name="DESC">
+      <a:v>
+        <![CDATA[EN:
+            <html>
+                <p>SystemDevErrorDetect</p>
+                <p>Switches the Development Error Detection and Notification ON or OFF.</p>
+                Note: Implementation Specific Parameter. <p/>
+            </html>
+        ]]>
+      </a:v>
+    </a:a>
+    <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+    </a:a>
+    <a:a name="ORIGIN" value="#M4_ORIGIN_XDM#" />
+    <a:a name="SCOPE" value="LOCAL" />
+    <a:a name="SYMBOLICNAMEVALUE" value="false" />
+    <a:a name="UUID" value="ECUC:10486f25-3f3d-46c0-bdf9-7277ae03e0fe" />
+    <a:da name="DEFAULT" value="false" />
+  </v:var>
+  <v:var name="SystemVersionInfoApi" type="BOOLEAN">
+    <a:a name="LABEL" value="Provide System VersionInfo Api" />
+    <a:a name="DESC">
+      <a:v>
+      <![CDATA[EN:
+          <html>
+              <p>SystemVersionInfoApi</p>
+              <p>Switches the System_GetVersionInfo function ON or OFF.</p>
+              Note: Implementation Specific Parameter. <p/>
+          </html>
+        ]]>
+      </a:v>
+    </a:a>
+    <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+    </a:a>
+    <a:a name="ORIGIN" value="#M4_ORIGIN_XDM#" />
+    <a:a name="SCOPE" value="LOCAL" />
+    <a:a name="SYMBOLICNAMEVALUE" value="false" />
+    <a:a name="UUID" value="ECUC:58d452d9-d71d-41f9-85ea-73a9a66465a9" />
+    <a:da name="DEFAULT" value="true" />
+  </v:var>
+</v:ctr>
+
+<!--
+SRS ID:     ECUC_System_HuLa_XXXXX
+Design ID:  InterruptGeneral_Object
+-->
+<v:ctr name="InterruptGeneral" type="IDENTIFIABLE">
+  <a:a name="DESC"
+    value="EN: This container contains the configuration (parameters) of the Interrupt System driver" />
+  <a:a name="UUID" value="ECUC:04b7035e-b29c-4d4d-bdce-5b16ede32e21" />
+  <!--
+  SRS ID:     ECUC_System_HuLa_XXXXX
+  Design ID:  InterruptEnable_Object
+  -->
+  <v:var name="InterruptEnable" type="BOOLEAN">
+    <a:a name="LABEL" value="Interrupt Enable" />
+    <a:a name="DESC">
+      <a:v>
+        <![CDATA[EN:
+            <html>
+                <p>SystemIntcEnable</p>
+                <p>Check: Enable Interrupt.</p>
+                <p>UnCheck: Disable Interrupt.</p>
+                Note: Implementation Specific Parameter. <p/>
+            </html>
+        ]]>
+      </a:v>
+    </a:a>
+    <a:a name="IMPLEMENTATIONCONFIGCLASS"
+      type="IMPLEMENTATIONCONFIGCLASS">
+      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+    </a:a>
+    <a:a name="ORIGIN" value="#M4_ORIGIN_XDM#" />
+    <a:a name="SCOPE" value="LOCAL" />
+    <a:a name="SYMBOLICNAMEVALUE" value="false" />
+    <a:a name="UUID" value="ECUC:45c9af20-c54f-40c7-b17b-930fdca50aa0" />
+    <a:da name="DEFAULT" value="false" />
+  </v:var>
+  <!--
+  SRS ID:     ECUC_System_HuLa_XXXXX
+  Design ID:  InterruptEnable_Object
+  -->
+  <v:var name="InterruptIPDevErrorDetect" type="BOOLEAN">
+      <a:a name="LABEL" value="Interrupt IP Development Error Detect"/>
+      <a:a name="DESC">
+            Enables and Disables DevAssert checks in IP code on or off.
+      </a:a>
+      <a:a name="IMPLEMENTATIONCONFIGCLASS"
+            type="IMPLEMENTATIONCONFIGCLASS">
+          <icc:v vclass="PreCompile">VariantLinkTime</icc:v>
+          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+      </a:a>
+      <a:a name="ORIGIN" value="#M4_ORIGIN_XDM#"/>
+      <a:a name="SCOPE" value="LOCAL"/>
+      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+      <a:a name="UUID" value="ECUC:ea814bb9-364f-444f-aa66-3b17ad08be5e"/>
+      <a:da name="DEFAULT" value="false"/>
+  </v:var>
+
+  <!--
+  SRS ID:     ECUC_System_HuLa_XXXXX
+  Design ID:  InterruptConfigSet_Object
+  -->
+  <v:lst name="InterruptConfigSet" type="MAP">
+    <a:da name="MAX" value="240" />
+    <a:da name="EDITABLE" type="XPath">
+      <a:tst expr="node:value(../InterruptEnable)" />
+    </a:da>
+    <a:da name="INVALID" type="XPath">
+      <a:tst
+        expr="(count(./*) = 0) and ((node:value(../InterruptEnable) = 'true'))"
+        true="This list must have at least one Config when enable InterruptEnable" />
+    </a:da>
+    <!--
+    SRS ID:     ECUC_System_HuLa_XXXXX
+    Design ID:  InterruptConfigSet_Object
+    -->
+    <v:ctr name="InterruptConfigSet" type="IDENTIFIABLE">
+      <a:a name="DESC">
+        <a:v>
+          <![CDATA[EN:<html>
+            Interrupt Config list<p/>
+            Note: Implementation Specific Parameter.<p/>
+          </html>]]>
+        </a:v>
+      </a:a>
+      <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+        <icc:v mclass="PreCompile">VariantPostBuild</icc:v>
+        <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+      </a:a>
+      <a:a name="UUID" value="ECUC:019ae809-98d0-43f1-8d43-12b3584ab30d" />
+      <!--
+      SRS ID:     ECUC_System_HuLa_XXXXX
+      Design ID:  InterruptConfig_Object
+      -->
+      <v:lst name="InterruptConfig" type="MAP">
+        <a:da name="MAX" value="240" />
+        <a:da name="EDITABLE" type="XPath">
+          <a:tst expr="node:value(../../../InterruptEnable)" />
+        </a:da>
+        <a:da name="INVALID" type="XPath">
+          <a:tst
+            expr="(count(./*) = 0) and ((node:value(../InterruptEnable) = 'true'))"
+            true="This list must have at least one Config when enable InterruptEnable" />
+        </a:da>
+        <!--
+        SRS ID:     ECUC_System_HuLa_XXXXX
+        Design ID:  InterruptConfig_Object
+        -->
+        <v:ctr name="InterruptConfig" type="IDENTIFIABLE">
+          <a:a name="DESC">
+            <a:v>
+              <![CDATA[EN:<html>
+                Interrupt Config list<p/>
+                Note: Implementation Specific Parameter.<p/>
+              </html>]]>
+            </a:v>
+          </a:a>
+          <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+            <icc:v mclass="PreCompile">VariantPostBuild</icc:v>
+            <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+          </a:a>
+          <a:a name="UUID" value="ECUC:d349cbbf-b048-4d6a-b916-64cdec816f10" />
+          <!--
+          SRS ID:     ECUC_System_HuLa_XXXXX
+          Design ID:  InterruptConfig_Object
+          -->
+          <v:ctr name="InterrupConfigIRQ" type="IDENTIFIABLE">
+            <a:a name="DESC" value="EN: Configuration of general interrupt parameters." />
+            <!--
+            SRS ID:     ECUC_System_HuLa_XXXXX
+            Design ID:  InterruptRequest_Object
+            -->
+            <v:ctr name="InterruptRequest" type="IDENTIFIABLE">
+              <a:a name="DESC"
+                value="EN: " />
+              <a:a name="UUID" value="ECUC:ad6cd00e-e870-4e55-84ea-6b5a6bfb3847" />
+              <!--
+              SRS ID:     ECUC_System_HuLa_XXXXX
+              Design ID:  InterruptIRQ_Object
+              -->
+              <v:var name="InterruptIRQ" type="ENUMERATION">
+                <a:a name="DESC">
+                  <a:v>
+                      <![CDATA[EN: <html>
+                      <p>Interrupt request vector selection.</p>
+                          <ul>
+                              <li>IRQ Vector</li>
+                          </ul>
+                      </html>]]>
+                  </a:v>
+                </a:a>
+                <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                  <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                </a:a>
+                <a:a name="LABEL" value="Interrupt Request Vector" />
+                <a:a name="ORIGIN" value="#M4_ORIGIN_XDM#" />
+                <a:a name="SCOPE" value="LOCAL" />
+                <a:a name="UUID" value="ECUC:0e3f1dee-fdb8-4869-98b7-ae6d40efe2f8" />
+                <a:da name="DEFAULT" value="IRQn_INT000" />
+                <a:da name="RANGE" type="XPath"
+                  expr="ecu:list('System.SystemConfig.SystemIntcIrqVector')" />
+              </v:var>
+              <!--
+              SRS ID:     ECUC_System_HuLa_XXXXX
+              Design ID:  HandleInterrupt_Object
+              -->
+              <v:var name="HandleInterrupt" type="FUNCTION-NAME">
+                <a:a name="LABEL" value="Handler Name" />
+                <a:a name="DESC" value="Handler intc, examble Handle_Interrupt_SRC_SWI_IRQ0" />
+                <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                </a:a>
+                <a:a name="UUID" value="ECUC:48ea908a-5394-420c-8969-31c9b25cb083" />
+                <a:a name="ORIGIN" value="#M4_ORIGIN_XDM#" />
+                <a:da name="EDITABLE" value="true" />
+                <a:da name="DEFAULT" value="Your_Handle_Interrupt" />
+              </v:var>
+              <!--
+              SRS ID:     ECUC_System_HuLa_XXXXX
+              Design ID:  IsrPriority_Object
+              -->
+              <v:var name="IsrPriority" type="INTEGER">
+                <a:a name="LABEL" value="Priority" />
+                <a:a name="DESC" value="Priority of the interrupt" />
+                <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                </a:a>
+                <a:a name="UUID" value="ECUC:f670b628-aba6-49cb-9883-1a73ce473121" />
+                <a:a name="ORIGIN" value="#M4_ORIGIN_XDM#" />
+                <a:da name="EDITABLE" value="true" />
+                <a:da name="DEFAULT" value="0" />
+                <a:da name="INVALID" type="Range">
+                  <a:tst expr="&lt;=31" />
+                  <a:tst expr="&gt;=0" />
+                </a:da>
+              </v:var>
+            </v:ctr>
+          </v:ctr>
+        </v:ctr>
+      </v:lst>
+    </v:ctr>
+  </v:lst>
+
+</v:ctr>
+
+<!--
+SRS ID:     ECUC_System_HuLa_XXXXX
+Design ID:  SystemTimer_Object
+-->
+<v:ctr name="SystemTimer" type="IDENTIFIABLE">
+  <a:a name="LABEL" value="SystemTimer" />
+  <a:a name="DESC"
+    value="EN: This container contains the configuration parameters for the OS Interface." />
+  <a:a name="UUID" value="ECUC:109fc535-d003-4409-b008-e7eb1fe93597" />
+  <!--
+  SRS ID:     ECUC_System_HuLa_XXXXX
+  Design ID:  UseSystemTimer_Object
+  -->
+  <v:var name="UseSystemTimer" type="BOOLEAN">
+    <a:a name="LABEL" value="Use System Timer" />
+    <a:a name="DESC" value="EN: Switches the system timer usage on or off. The system timer is architecture-specific and may not exist." />
+    <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+    </a:a>
+    <a:da name="EDITABLE" type="XPath">
+      <a:tst expr="(node:value(../UseFreeRTOS) = 'false')" />
+    </a:da>
+    <a:a name="ORIGIN" value="HuLa" />
+    <a:a name="SCOPE" value="LOCAL" />
+    <a:a name="SYMBOLICNAMEVALUE" value="false" />
+    <a:a name="UUID" value="ECUC:37aae4a5-265d-4a90-b8fc-85774cacbdda" />
+    <a:da name="DEFAULT" value="false" />
+  </v:var>
+
+  <v:var name="UseFreeRTOS" type="BOOLEAN">
+    <a:a name="LABEL" value="Use FreeRTOS" />
+    <a:a name="DESC" value="EN: Use FreeRTOS." />
+    <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+    </a:a>
+    <a:da name="EDITABLE" type="XPath">
+      <a:tst expr="(node:value(../UseSystemTimer) = 'false')" />
+    </a:da>
+    <a:a name="ORIGIN" value="HuLa" />
+    <a:a name="SCOPE" value="LOCAL" />
+    <a:a name="SYMBOLICNAMEVALUE" value="false" />
+    <a:a name="UUID" value="ECUC:b45905cf-2721-4c45-91cc-84b6ece9c915" />
+    <a:da name="DEFAULT" value="false" />
+  </v:var>
+  <!--
+  SRS ID:     ECUC_System_HuLa_XXXXX
+  Design ID:  SystemEnablePrivilegedModeSupport_Object
+  -->
+  <v:var name="SystemEnablePrivilegedModeSupport" type="BOOLEAN">
+    <a:a name="LABEL" value="Enable Privileged Mode Support" />
+    <a:a name="DESC">
+      <a:v>
+        <![CDATA[EN:
+              <html>
+                  <p>When this parameter is enabled, the System module will adapt to run from Privileged Mode.
+              </html>
+          ]]>
+      </a:v>
+    </a:a>
+    <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+    </a:a>
+    <a:a name="ORIGIN" value="HuLa" />
+    <a:a name="SYMBOLICNAMEVALUE" value="false" />
+    <a:a name="UUID" value="ECUC:cfde660e-c616-47a3-ac97-d6346b6842ab" />
+    <a:da name="DEFAULT" value="false" />
+  </v:var>
+  <!--
+  SRS ID:     ECUC_System_HuLa_XXXXX
+  Design ID:  SystemClockFrequency_Object
+  -->
+  <v:var name="SystemClockFrequency" type="FLOAT">
+    <a:a name="DESC" value="EN: The Clock Frequency." />
+    <a:a name="LABEL" value="System Clock Frequency" />
+    <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+    </a:a>
+    <a:a name="ORIGIN" value="AUTOSAR_ECUC" />
+    <a:a name="SCOPE" value="LOCAL" />
+    <a:a name="SYMBOLICNAMEVALUE" value="false" />
+    <a:a name="UUID" value="ECUC:79b6217a-e9c7-4b1f-8e7b-ac53df3d411e" />
+    <a:da name="DEFAULT" value="8000000" />
+    <a:da name="INVALID" type="Range">
+      <a:tst expr="&lt;=100000000" />
+      <a:tst expr="&gt;=100000" />
+    </a:da>
+  </v:var>
+</v:ctr>
+<!-- END CODE  -->
+
+                <v:ctr name="CommonPublishedInformation" type="IDENTIFIABLE">
+                  <a:a name="DESC" value="EN: Hardware dependent settings for the watchdog driver&apos;s &quot;slow&quot; mode." />
+                  <a:a name="UUID" value="ECUC:d3f49799-6193-4525-8faf-ca70964875ea" />
+
+
+                  <v:var name="ArReleaseMajorVersion" type="INTEGER_LABEL">
+                    <a:a name="LABEL" value="Ar Release Major Version" />
+                    <a:a name="DESC" value="EN: Major version number of AUTOSAR specification on which the appropriate implementation is based on." />
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PublishedInformation">VariantLinkTime</icc:v>
+                      <icc:v vclass="PublishedInformation">VariantPreCompile</icc:v>
+                      <icc:v vclass="PublishedInformation">VariantPostBuild</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="#M4_ORIGIN_XDM#" />
+                    <a:a name="SCOPE" value="LOCAL" />
+                    <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                    <a:a name="UUID" value="ECUC:248813f2-237c-4e5a-b6f1-6f52ec50f7d9" />
+                    <a:da name="DEFAULT" value="#M4_AUTOSAR_RELEASE_VERSION_MAJOR#" />
+                    <a:da name="EDITABLE" value="true" />
+                  </v:var>
+
+
+                  <v:var name="ArReleaseMinorVersion" type="INTEGER_LABEL">
+                    <a:a name="LABEL" value="Ar Release Minor Version" />
+                    <a:a name="DESC" value="EN: Minor version number of AUTOSAR specification on which the appropriate implementation is based on." />
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PublishedInformation">VariantLinkTime</icc:v>
+                      <icc:v vclass="PublishedInformation">VariantPreCompile</icc:v>
+                      <icc:v vclass="PublishedInformation">VariantPostBuild</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="#M4_ORIGIN_XDM#" />
+                    <a:a name="SCOPE" value="LOCAL" />
+                    <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                    <a:a name="UUID" value="ECUC:667906be-3546-4094-98e7-8b7aa0e22ef9" />
+                    <a:da name="DEFAULT" value="#M4_AUTOSAR_RELEASE_VERSION_MINOR#" />
+                    <a:da name="EDITABLE" value="true" />
+                  </v:var>
+
+
+                  <v:var name="ArReleasePatchVersion" type="INTEGER_LABEL">
+                    <a:a name="LABEL" value="Ar Release Revision Version" />
+                    <a:a name="DESC" value="EN: Revision version number of AUTOSAR specification on which the appropriate implementation is based on." />
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PublishedInformation">VariantLinkTime</icc:v>
+                      <icc:v vclass="PublishedInformation">VariantPreCompile</icc:v>
+                      <icc:v vclass="PublishedInformation">VariantPostBuild</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="#M4_ORIGIN_XDM#" />
+                    <a:a name="SCOPE" value="LOCAL" />
+                    <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                    <a:a name="UUID" value="ECUC:b00dfa31-56c2-43c6-8b31-34ff2b9df898" />
+                    <a:da name="DEFAULT" value="#M4_AUTOSAR_RELEASE_VERSION_PATCH#" />
+                    <a:da name="EDITABLE" value="true" />
+                  </v:var>
+
+
+                  <v:var name="ModuleId" type="INTEGER_LABEL">
+                    <a:a name="LABEL" value="Module Id" />
+                    <a:a name="DESC" value="EN: Specifies the configure module ID." />
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PublishedInformation">VariantLinkTime</icc:v>
+                      <icc:v vclass="PublishedInformation">VariantPreCompile</icc:v>
+                      <icc:v vclass="PublishedInformation">VariantPostBuild</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="#M4_ORIGIN_XDM#" />
+                    <a:a name="SCOPE" value="LOCAL" />
+                    <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                    <a:a name="UUID" value="ECUC:17365cde-81ac-490a-baa5-b2924222b7a9" />
+                    <a:da name="DEFAULT" value="#DEV_MODULE_ID_AUTOSAR#" />
+                    <a:da name="EDITABLE" value="true" />
+                  </v:var>
+                  <v:var name="SwMajorVersion" type="INTEGER_LABEL">
+                    <a:a name="LABEL" value="Sw Major Version" />
+                    <a:a name="DESC" value="EN: Major version number of the vendor specific implementation of the module." />
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PublishedInformation">VariantLinkTime</icc:v>
+                      <icc:v vclass="PublishedInformation">VariantPreCompile</icc:v>
+                      <icc:v vclass="PublishedInformation">VariantPostBuild</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="#M4_ORIGIN_XDM#" />
+                    <a:a name="SCOPE" value="LOCAL" />
+                    <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                    <a:a name="UUID" value="ECUC:6394d887-ad62-473f-9722-058c302b27e1" />
+                    <a:da name="DEFAULT" value="#M4_SW_VERSION_MAJOR#" />
+                    <a:da name="EDITABLE" value="true" />
+                  </v:var>
+                  <v:var name="SwMinorVersion" type="INTEGER_LABEL">
+                    <a:a name="LABEL" value="Sw Minor Version" />
+                    <a:a name="DESC" value="EN: Minor version number of the vendor specific implementation of the module." />
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PublishedInformation">VariantLinkTime</icc:v>
+                      <icc:v vclass="PublishedInformation">VariantPreCompile</icc:v>
+                      <icc:v vclass="PublishedInformation">VariantPostBuild</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="#M4_ORIGIN_XDM#" />
+                    <a:a name="SCOPE" value="LOCAL" />
+                    <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                    <a:a name="UUID" value="ECUC:ad5535d0-6583-4195-ac19-232a73c88043" />
+                    <a:da name="DEFAULT" value="#M4_SW_VERSION_MINOR#" />
+                    <a:da name="EDITABLE" value="true" />
+                  </v:var>
+                  <v:var name="SwPatchVersion" type="INTEGER_LABEL">
+                    <a:a name="LABEL" value="Sw Patch Version" />
+                    <a:a name="DESC" value="EN: Patch level version number of the vendor specific implementation of the module." />
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PublishedInformation">VariantLinkTime</icc:v>
+                      <icc:v vclass="PublishedInformation">VariantPreCompile</icc:v>
+                      <icc:v vclass="PublishedInformation">VariantPostBuild</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="#M4_ORIGIN_XDM#" />
+                    <a:a name="SCOPE" value="LOCAL" />
+                    <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                    <a:a name="UUID" value="ECUC:282c2d53-08c8-4154-a628-e1a83bfff6c3" />
+                    <a:da name="DEFAULT" value="#M4_SW_VERSION_PATCH#" />
+                    <a:da name="EDITABLE" value="true" />
+                  </v:var>
+                  <v:var name="VendorId" type="STRING">
+                    <a:a name="LABEL" value="Vendor Id" />
+                    <a:a name="DESC" value="EN: Vendor ID of the dedicated implementation of this module according to the AUTOSAR vendor list." />
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PublishedInformation">VariantLinkTime</icc:v>
+                      <icc:v vclass="PublishedInformation">VariantPreCompile</icc:v>
+                      <icc:v vclass="PublishedInformation">VariantPostBuild</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="#M4_ORIGIN_XDM#" />
+                    <a:a name="SCOPE" value="LOCAL" />
+                    <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                    <a:a name="UUID" value="ECUC:84b6a12a-5b42-4dc0-8412-b6f7ddcdae68" />
+                    <a:da name="DEFAULT" value="#M4_VENDOR_ID#" />
+                    <a:da name="EDITABLE" value="true" />
+                  </v:var>
+                </v:ctr>
+                
+                <d:ref type="REFINED_MODULE_DEF" value="ASPath:/AUTOSAR/EcucDefs/#DEV_MODULE_NAME#"/>
+              </v:ctr>
+            </d:chc>
+          </d:lst>
+        </d:ctr>
+      </d:lst>
+  </d:ctr>
+</datamodel>
