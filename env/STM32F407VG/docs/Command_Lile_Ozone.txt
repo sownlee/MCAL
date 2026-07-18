@@ -1,0 +1,228 @@
+------------------------------------------------------------------------------------------------------------------------------------------------------
+Command                      Arguments                  Hotkey              Description
+------------------------------------------------------------------------------------------------------------------------------------------------------
+Break.Clear                  Address                                        Clears a breakpoint
+Break.ClearAll                                                              Clears all breakpoints
+Break.ClearAllOnData                                                        Clears all data breakpoints
+Break.ClearOnData            Symbol/Address                                 Clears a data breakpoint
+Break.ClearOnSrc             SrcLoc                                         Clears a breakpoint on a source line
+Break.ClearOnSymbol          Symbol                                         Clears a data breakpoint on a symbol
+Break.Disable                Address                                        Disables a breakpoint
+Break.DisableAll                                                            Disables all breakpoints on source lines
+Break.DisableOnData          Symbol/Address                                 Disables a data breakpoint
+Break.DisableOnSrc           SrcLoc                                         Disables a breakpoint on a source line
+Break.DisableOnSymbol        Symbol                                         Disables a data breakpoint on a symbol
+Break.Edit                   Parameters                                     Edits a breakpoint
+Break.EditOnData             Parameters                                     Edits a data breakpoint
+Break.EditOnSymbol           Parameters                                     Edits a data breakpoint on a symbol
+Break.Enable                 Address                                        Enables a breakpoint
+Break.EnableAll                                                             Enables all breakpoints on source lines
+Break.EnableOnData           Symbol/Address                                 Enables a data breakpoint
+Break.EnableOnSrc            SrcLoc                                         Enables a breakpoint on a source line
+Break.EnableOnSymbol         Symbol                                         Enables a data breakpoint on a symbol
+Break.Set                    Address                                        Sets a breakpoint
+Break.SetCmdOnAddr           Address, Function                              Assigns a script function to a breakpoint
+Break.SetCommand             Location, Function                             Assigns a script function to a breakpoint
+Break.SetEx                  Address, Type                                  Sets a hardware or software breakpoint
+Break.SetOnData              Symbol/Address                                 Sets a data breakpoint
+Break.SetOnSrc               SrcLoc                                         Sets a breakpoint on a source line
+Break.SetOnSrcEx             SrcLoc, Type                                   Sets a hardware or software breakpoint on a source line
+Break.SetOnSymbol            Symbol                                         Sets a data breakpoint on a symbol
+Break.SetType                Location, Type                                 Sets a breakpoint's implementation type
+Break.SetVectorCatch         Index mask                                     Assigns a vector catch configuration
+Coverage.Exclude             RegExp                                         Exclude item(s) from the code coverage statistic
+Coverage.ExcludeNOPs                                                        Excludes all trailing NOP instructions from the code coverage statistic
+Coverage.Include             RegExp                                         Include item(s) to the code coverage statistic
+Debug.Connect                                                               Connects to the target
+Debug.Continue                                          F5                  Resumes program execution
+Debug.Disconnect                                                            Disconnects from the target
+Debug.Download                                                              Downloads the program file
+Debug.Halt                                              Ctrl+F5             Halts program execution
+Debug.IsHalted                                                              Queries the program state
+Debug.LoadSnapshot                                      Ctrl+Alt+L          Loads a debug snapshot
+Debug.ReadIntoInstCache      Address, Size                                  Intitializes the instruction cache from target memory content
+Debug.Reset                                             F4                  Resets the program
+Debug.RunTo                  SrcLoc/Address                                 Runs the program to a source code line or instruction address
+Debug.SaveSnapshot                                      Ctrl+Alt+S          Writes a debug snapshot
+Debug.SetConnectMode         Mode                                           Sets the connection mode
+Debug.SetNextPC              Address                                        Sets the next PC to be executed
+Debug.SetNextStatement       SrcLoc                                         Sets the next source line to be executed
+Debug.SetResetMode           Mode                                           Sets the reset mode
+Debug.Start                                             F5                  Starts the debug session
+Debug.StepInto                                          F11                 Steps into the current subroutine
+Debug.StepOut                                           Shift+F11           Steps out of the current subroutine
+Debug.StepOver                                          F10                 Steps over the current subroutine
+Debug.Stop                                              Shift+F5            Stops the debug session
+Edit.Color                   ID, Value                                      Edits an application color
+Edit.DisplayFormat           Symbol, Value                                  Edits a symbol's display format
+Edit.Font                    ID, Font                                       Edits an application font
+Edit.MemZone                 Symbol, Zone                                   Sets the memory zone of a symbol
+Edit.Preference              ID, Value                                      Edits a user preference
+Edit.RefreshRate             Symbol, Freq                                   Sets the refresh rate of a symbol
+Edit.SysVar                  ID, Value                                      Edits a system variable
+Elf.GetBaseAddr                                                             Returns the program's base memory address (download address)
+Elf.GetEndianess                                                            Returns the data endianess of the program
+Elf.GetEntryFuncPC                                                          Returns the PC register value at the program's entry function
+Elf.GetEntryPointPC                                                         Returns the program's initial PC register value
+Elf.GetExprValue             Expr                                           Evaluates a C-style symbol expression
+Elf.GetFileClass                                                            Returns the program's ELF file class
+Elf.PrintSectionInfo         Sort column                                    Prints section information to the console window
+Elf.SetConfig                Flags                                          Configures the ELF parser
+Exec.AddCommandOnOpen        J-Link Command                                 Schedules a J-Link command to be executed immediately before or after opening J-Link connection
+Exec.Command                 J-Link Command                                 Executes a J-Link command
+Exec.Connect                                                                Executes JLink's firmware connection routine
+Exec.Download                File                                           Downloads a program to the target device
+Exec.Reset                                                                  Executes JLink's firmware reset routine
+Export.CodeProfile           File, Options, Items                           Export code profile
+Export.DataGraphs            File                                           Export symbol trace
+Export.Disassembly           File, Entity, Options                          Export program disassembly
+Export.PowerGraphs           File                                           Export power trace
+Export.Trace                 File, MaxInstCnt                               Export instruction trace
+File.Close                   File                       Ctrl+F4             Closes a document
+File.CloseAll                                           Ctrl+Alt+F4         Closes all open documents
+File.CloseAllButThis                                    Ctrl+Shift+F4       Closes all but the active document
+File.CloseAllUnedited                                                       Closes all unedited documents
+File.Exit                                               Alt+F4              Closes the application
+File.Load                    File, Address              Ctrl+Shift+L        Downloads a file to target memory
+File.Locate                  File                                           Locates a document's file system path
+File.NewProject                                         Ctrl+N              Creates a new project
+File.NewProjectWizard                                   Ctrl+Alt+N          Opens the new project wizard
+File.Open                    File                       Ctrl+O              Opens a document
+File.OpenProjectInEditor                                Ctrl+Shift+E        Opens the project file for editing
+File.OpenRecent              Index                                          Opens a recent program file
+File.Reload                  File                                           Reloads a document from disk
+File.Save                    File                       Ctrl+S              Saves an open document to disk
+File.SaveAll                                                                Saves all modified files
+File.SaveAs                  File, FileNew                                  Saves an open document under a new file path
+File.SaveCopyAs              File, FileOut                                  Saves a copy of an open document
+File.SaveProjectAs           File                       Ctrl+Shift+S        Saves the project file under a new file path
+File.SelectInExplorer        File/Directory             Ctrl+F2             Selects a file or folder in the native file viewer
+Find.Function                Function                   Ctrl+M              Navigates to a function
+Find.GlobalData              Symbol                     Ctrl+J              Navigates to a global data symbol
+Find.SourceFile              File                       Ctrl+K              Locates and opens a source file
+Find.Text                    Text                       Ctrl+F              Searches a text in the active document
+Find.TextInFiles             Text                       Ctrl+Shift+F        Searches a text in a set of documents
+Find.TextInTrace             Text                       Ctrl+Shift+T        Searches a text within the instruction trace
+Help.About                                                                  Shows the about dialog
+Help.Commands                                           Shift+F1            Shows the command help
+Help.ReleaseNotes                                                           Shows the release notes
+Help.UserGuide                                          F1                  Shows the user guide
+OS.AddContextSwitchSymbol    Label/Function                                 Specifies the code symbol that completes a task switch
+Profile.Exclude              RegExp                                         Exclude item(s) from code profile statistic
+Profile.ExportCSV            File, Fmt, Opts, Items                         Export code profile as CSV
+Profile.Include              RegExp                                         Include item(s) to code profile statistic
+Profile.Reset                                                               Reset code profile data
+Project.AddFileAlias         Old Path, New Path                             Adds a file path alias
+Project.AddPathSubstitute    Old Path, New Path                             Adds a directory path substitute
+Project.AddRTTSearchRange    Address, Size                                  Adds an RTT memory search range
+Project.AddRootPath          Directory Path                                 Adds a root path
+Project.AddSearchPath        Directory Path                                 Adds a file search path
+Project.AddSvdFile           File                                           Adds the contents of a svd file to the register window
+Project.ConfigDisassembly    Flags                                          Edits disassembler options
+Project.ConfigSWO            SWOFreq, CpuFreq                               Configures Serial Wire Output (SWO) settings
+Project.ConfigSemihosting    Configuration String                           Configures semihosting IO
+Project.DisableSessionSave   Flags                                          Disables saving of session information
+Project.RelocateSymbols      Symbols, Offset                                Relocates one or multiple symbols
+Project.SetBPType            Type                                           Sets the default breakpoint implementation type
+Project.SetConsoleLogFile    File                                           Sets the console message log file
+Project.SetCorePlugin        File                                           Sets the file path to the core plugin
+Project.SetDevice            Device                                         Specifies the target device
+Project.SetDisassemblyPlugin File                                           Sets the file path to the disassembly support plugin
+Project.SetHostIF            HostIF, Identifier                             Specifies the host interface
+Project.SetJLinkLogFile      File                                           Sets the text file that receives J-Link logging output
+Project.SetJLinkScript       File                                           Sets the J-Link script to be executed on debug session start
+Project.SetJTAGConfig        DRPre, IRLen                                   Specifies the target interface scan chain settings
+Project.SetMemZoneRunning    Zone Name                                      Sets the default memory zone to access when the program is running
+Project.SetOSPlugin          File                                           Sets the file path to the RTOS-Awareness plugin
+Project.SetRTT               On/Off                                         Enables or disables RTT
+Project.SetSWO               On/Off, SWOFreq, CpuFreq                       Configures Serial Wire Output (SWO) settings
+Project.SetSemihosting       On/Off                                         Enables or disables semihosting IO
+Project.SetTIFSpeed          Frequency                                      Specifies the target interface speed in Hz
+Project.SetTargetIF          TargetIF                                       Specifies the target interface
+Project.SetTerminalLogFile   File                                           Sets the terminal message log file
+Project.SetTraceFile         File, ByteSize, Yes/No                         Assigns the trace file
+Project.SetTracePortWidth    Width                                          Assigns the trace port width
+Project.SetTraceSource       String                                         Assigns the trace source to use
+Project.SetTraceTiming       D0,D1,D2,D3 [ps]                               Assigns the trace line delays
+Register.Addr                Register                                       Get address of memory-mapped register
+Script.DefineConst           Name, Value                                    Defines a script constant
+Script.Exec                  Func, Paramlist                                Executes a script function
+Show.CallGraph               Func/Address/SrcLoc        Ctrl+H              Displays the call graph of a function
+Show.Data                    Symbol/Address/SrcLoc      Ctrl+T              Displays the data location of a symbol
+Show.Declaration             Symbol                     Shift+F12           Displays the declaration source location of a symbol
+Show.Definition              Symbol                     F12                 Displays the definition source location of a symbol
+Show.Disassembly             Func/Address/SrcLoc        Ctrl+D              Displays the disassembly of a function or source statement
+Show.InstTrace               Stack Position                                 Displays a previously executed instruction
+Show.Line                    Line Number                                    Displays a source line
+Show.Memory                  Address                                        Displays a memory location
+Show.MemoryMap               Symbol/Address/SrcLoc      Ctrl+B              Displays the memory map location of a symbol
+Show.NextResult                                                             Displays the next item matching the search pattern
+Show.PC                                                                     Displays the PC instruction
+Show.PCLine                                                                 Displays the PC source line
+Show.PrevResult                                                             Displays the previous item matching the search pattern
+Show.Source                  Symbol/Address/SrcLoc      Ctrl+U              Displays the source location of a function, symbol or instruction
+Show.ValueData               Expression                                     Displays the symbol pointed to within the disassembly window
+Show.ValueDisassembly        Expression                                     Displays the symbol pointed to within the disassembly window
+Show.ValueSource             Expression                                     Displays the symbol pointed to within the source viewer
+Snapshot.LoadReg             Register                                       Reads a register from the snapshot and writes it to target
+Snapshot.LoadU32             Address, Size                                  Reads a value from the snapshot and writes it to target
+Snapshot.ReadReg             Register                                       Reads a target register from the snapshot
+Snapshot.ReadU32             Address, Size                                  Reads a target memory value from the snapshot
+Snapshot.SaveReg             Register                                       Saves a target register to the snapshot
+Snapshot.SaveU32             Address, Size                                  Saves a target memory value to the snapshot
+Target.AddMemorySegment      Name, Addr, Size                               Adds a memory segment
+Target.EraseChip                                                            Enable J-Link power supply to the target
+Target.FillMemory            Addr, Size, Value                              Fills a target memory block with a given value
+Target.GetReg                Register                                       Reads a target device register
+Target.LoadMemory            File, Addr                                     Writes data from a binary file to the target device
+Target.LoadMemoryMap         File                                           Loads a memory map file
+Target.PowerOn               On/Off                                         Enable J-Link power supply to the target
+Target.ReadMemory            Address, Size                                  Reads a target memory block
+Target.ReadU16               Address                                        Reads a 16-bit value from target memory
+Target.ReadU32               Address                                        Reads a 32-bit value from target memory
+Target.ReadU64               Address                                        Reads a 64-bit value from target memory
+Target.RadeU8                Address                                        Reads a 8-bit value from target memory
+Target.SaveMemory            File, Addr, Size                               Writes target memory to a binary file
+Target.SetAccessWidth        Value                                          Specifies the default memory access width
+Target.SetEndianess          BigEndian 1/0                                  Sets the endianess of the target device
+Target.SetReg                Register, Value                                Writes a target device register
+Target.WriteU16              Address, Value                                 Writes a 16-bit value to target memory
+Target.WriteU32              Address, Value                                 Writes a 32-bit value to target memory
+Target.WriteU64              Address, Value                                 Writes a 64-bit value to target memory
+Target.WriteU8               Address, Value                                 Writes a 8-bit value to target memory
+Timeline.Reset                                                              Resets trace and sampling data
+Toolbar.Close                Toolbar                                        Closes a toolbar
+Toolbar.Show                 Toolbar                                        Shows a toolbar
+Tools.JLinkSettings                                     Ctrl+Alt+J          Opens the J-Link settings dialog
+Tools.Preferences                                       Ctrl+Alt+P          Opens the user preference dialog
+Tools.SemihostingSettings                               Ctrl+Alt+H          Opens the semihosting settings dialog
+Tools.SysVars                                           Ctrl+Alt+V          Opens the system variable editor
+Tools.TraceSettings                                     Ctrl+Alt+T          Opens the trace settings dialog
+Trace.ClearAllPoints                                                        Clears all tracepoints
+Trace.ClearPoint             Location                                       Clears a tracepoint
+Trace.DisablePoint           Location                                       Disables a tracepoint
+Trace.EnablePoint            Location                                       Enables a tracepoint
+Trace.Reset                                                                 Resets instruction trace data
+Trace.SetPoint               Operation, Location                            Sets a tracepoint
+Trace.SetSyncWithCode        On/Off                     Ctrl+Q              Sync itrace with code windows
+Util.Error                   Text, StopDebug                                Shows an error message box and stops the debug session
+Util.Log                     Text                                           Prints a message to the console window
+Util.LogHex                  Text, IntVal                                   Prints a formated message to the console window
+Util.Sleep                   Milliseconds                                   Pauses the current thread for a given amount of time
+Watch.Add                    Expression                 Ctrl+W              Adds a symbol to the watched data window
+Watch.Insert                 Expression, Row                                Inserts a symbol into the watched data window
+Watch.Quick                  Expression                 Shift+F9            Quick watch expression
+Watch.Remove                 Expression                                     Removes a symbol from the watched data window
+Window.Add                   Window, Symbol                                 Adds a symbol to a window
+Window.Clear                 Window                                         Clears a window
+Window.Close                 Window                     Alt+X               Closes a window
+Window.CloseAll                                         Alt+Shift+X         Closes all windows
+Window.CollapseAll           Window                                         Collapses all items
+Window.ExpandAll             Window                                         Expands all items
+Window.Export                Window, File                                   Exports the contents of a window to file
+Window.Insert                Window, Symbol, Row                            Inserts a symbol into a window
+Window.Remove                Widnow, Symbol                                 Removed a Symbol from a window
+Window.SetDisplayFormat      Window, Value                                  Sets a window's display format
+Window.Show                  Window                                         Shows a window
+Window.ShowFullScreen        On/Off                     Alt+Shift+Return    Enters or exits fullscreen mode
+Window.WaitForUpdateComplete MaxTime                                        Waits until all debug windows have completed updating
