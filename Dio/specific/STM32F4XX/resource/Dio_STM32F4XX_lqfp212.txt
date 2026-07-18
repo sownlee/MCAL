@@ -1,0 +1,14 @@
+#####################  BEGIN Dio_STM32F4XX_lqfp212 ##########################
+# Dio.AvailablePortPinsForRead    : The pins that are available on each port for reading         #
+#                                   A 16 bit value describes each port.                          #
+#                                   A bit value in bit mask means correspond pin                 #
+#                                   from that port is available for read in the current package. #
+# Dio.AvailablePortPinsForWrite   : The pins that are available on each port for writing         #
+#                                   A 16 bit value describes each port.                          #
+#                                   A bit value in bit mask means correspond pin                 #
+#                                   from that port is available for write in the current package.#
+Dio.AvailablePortPinsForRead:0xFFFF,0xFFFF,0xFFFF,0xFFFF,0xFFFF,0xFFFF,0xFFFF,0xFFFF,0x0EFF
+Dio.AvailablePortPinsForWrite:0xFFFF,0xFFFF,0xFFFF,0xFFFF,0xFFFF,0xFFFF,0xFFFF,0xFFFF,0x0EFF
+Dio.LastChannel: 100
+Dio.MaxPinNumber: 16
+#####################  END Dio_STM32F4XX_lqfp212 ############################
