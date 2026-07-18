@@ -1,0 +1,1141 @@
+<?xml version='1.0'?>
+<!--
+/***********************************************************************************************************************
+ * Project Name: Classic_Autosar_02
+ *
+ * File Name: Port.xdm
+ *
+ * Description: Implementation of Port
+ *
+ * AutoSAR Version:         4.4.0
+ *
+ * Revision:
+ *              Version         Date                Change History
+ *              0.0.1          07/05/2026           Initial version
+ *
+ **********************************************************************************************************************/
+-->
+<datamodel version="7.0"
+          xmlns="http://www.tresos.de/_projects/DataModel2/16/root.xsd" 
+          xmlns:a="http://www.tresos.de/_projects/DataModel2/16/attribute.xsd" 
+          xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd" 
+          xmlns:d="http://www.tresos.de/_projects/DataModel2/06/data.xsd">
+
+
+  <d:ctr type="AUTOSAR" factory="autosar"
+        xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd" 
+        xmlns:cd="http://www.tresos.de/_projects/DataModel2/08/customdata.xsd" 
+        xmlns:f="http://www.tresos.de/_projects/DataModel2/14/formulaexpr.xsd" 
+        xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd" 
+        xmlns:mt="http://www.tresos.de/_projects/DataModel2/11/multitest.xsd"  
+        xmlns:variant="http://www.tresos.de/_projects/DataModel2/11/variant.xsd">
+
+      <d:lst type="TOP-LEVEL-PACKAGES">
+        <d:ctr name="HULA15440090" type="AR-PACKAGE">
+          <d:lst type="ELEMENTS">
+
+            <!--
+            SRS ID:     ECUC_Port_00135
+            Design ID:  Port_Object
+            -->
+            <d:chc name="Port" type="AR-ELEMENT" value="MODULE-DEF">
+              <v:ctr type="MODULE-DEF">
+
+                <a:a name="ADMIN-DATA" type="ADMIN-DATA">
+                  <ad:ADMIN-DATA>
+                    <ad:DOC-REVISIONS>
+                      <ad:DOC-REVISION>
+                        <ad:REVISION-LABEL>4.4.0</ad:REVISION-LABEL>
+                        <ad:ISSUED-BY>AUTOSAR</ad:ISSUED-BY>
+                      </ad:DOC-REVISION>
+                    </ad:DOC-REVISIONS>
+                  </ad:ADMIN-DATA>
+                </a:a>
+
+                <a:a name="DESC" value="EN: Configuration of the Port module." />
+                <a:a name="LOWER-MULTIPLICITY" value="0" />
+                <a:a name="UPPER-MULTIPLICITY" value="1"/>
+                <a:a name="POSTBUILDVARIANTSUPPORT" value="true" />
+                <a:a name="RELEASE" value="asc:4.4.0" />
+                <a:a name="UUID" value="ECUC:af42ec2b-ca6a-4adc-b0b9-59a3beba9258" />
+
+                <v:var name="POST_BUILD_VARIANT_USED" type="BOOLEAN">
+                  <a:a name="DESC">
+                      <a:v>EN:
+                        &lt;html&gt;
+                          Indicates whether a module implementation has or plans to have (i.e., introduced at link or post-build time) new post-build variation points.
+                        &lt;/html&gt;
+                    </a:v>
+                  </a:a>
+
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="Link">VariantLinkTime</icc:v>
+                    <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="LABEL" value="Post Build Variant Used" />
+                  <a:a name="ORIGIN" value="EB" />
+                  <a:a name="POSTBUILDVARIANTVALUE" value="false" />
+                  <a:da name="DEFAULT" value="true" />
+                  <a:da name="READONLY" value="FALSE" />
+                  <a:da name="TOOLTIP"
+                    value="Indicates whether a module implementation has or plans to have (i.e., introduced at link or post-build time) new post-build variation points." />
+                </v:var>
+
+                <v:var name="IMPLEMENTATION_CONFIG_VARIANT" type="ENUMERATION">
+                  <a:a name="DESC">
+                    <a:v>EN:
+                      &lt;html&gt;
+                        The configuration parameters in pre-compile time are set before compilation starts&lt;p/&gt;
+                        VariantPreCompile: Solely compile-time configuration settings. A solitary collection of parameters.&lt;p/&gt;
+                        The configuration parameter in post-compile time are located in a separate segment and can be loaded after the code&lt;p/&gt;
+                        VariantPostBuild: Blend of precompile and post-build configuration parameters. Singular set of parameters employed.
+                      &lt;/html&gt;
+                    </a:v>
+                  </a:a>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantLinkTime</icc:v>
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="LABEL" value="Config Variant" />
+                  <a:da name="INVALID" type="XPath">
+                    <a:tst expr="(node:refs('ASPathDataOfSchema:/AUTOSAR/EcuC')/EcucPostBuildVariants/EcucSelectedPostBuildVariantRef) and ((node:containsValue(., 'VariantPreCompile')))"
+                      true="EcucPostBuildVariants should be disabled"/>    
+                    <a:tst expr="(node:fallback(as:modconf('Port')[1]/POST_BUILD_VARIANT_USED, 'true') = 'true') and ((node:containsValue(., 'VariantPreCompile')))"
+                      true="Post Build Variant Used should be disabled"/>
+                  </a:da>
+                  <a:da name="DEFAULT" value="VariantPostBuild" />
+                  <a:da name="RANGE">
+                    <a:v>VariantLinkTime</a:v>
+                    <a:v>VariantPostBuild</a:v>
+                    <a:v>VariantPreCompile</a:v>
+                  </a:da>
+                </v:var>
+
+<!--
+SRS ID:     ECUC_Port_00117
+Design ID:  PortGeneral_Object
+-->
+<v:ctr name="PortGeneral" type="IDENTIFIABLE">
+  <a:a name="DESC">
+    <a:v>EN:
+          &lt;html&gt;
+              Module wide configuration parameters of the PORT driver.
+          &lt;/html&gt;
+    </a:v>
+  </a:a>
+  <a:a name="UUID" value="ECUC:fb4929f4-51af-4481-98f1-72ae721537f4"/>
+
+  <!--
+  SRS ID:     ECUC_Port_00123
+  Design ID:  PortDevErrorDetect_Object
+  -->
+  <v:var name="PortDevErrorDetect" type="BOOLEAN">
+    <a:a name="LABEL" value="Port Dev Error Detect"/>
+    <a:a name="DESC">
+      <a:v>EN:
+          &lt;html&gt;
+          Switches the development error detection and notification on or off.&lt;p/&gt;
+          true: detection and notification is enabled.&lt;p/&gt;
+          false: detection and notification is disabled.
+          &lt;/html&gt;
+      </a:v>
+    </a:a>
+    <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+      <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+    </a:a>
+    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+    <a:a name="SCOPE" value="LOCAL"/>
+    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+    <a:a name="UUID" value="ECUC:4b9f69da-1154-4f01-a993-805464fef1df"/>
+    <a:da name="DEFAULT" value="true"/>
+  </v:var>
+
+  <!--
+  SRS ID:     ECUC_Port_00131
+  Design ID:  PortSetPinDirectionApi_Object
+  -->
+  <v:var name="PortSetPinDirectionApi" type="BOOLEAN">
+    <a:a name="LABEL" value="Port Set Pin Direction Api"/>
+    <a:a name="DESC">
+      <a:v>EN:
+          &lt;html&gt;
+              Pre-processor switch to enable/disable the use of the function Port_SetPinDirection().&lt;p/&gt;
+              true: Enabled - Function Port_SetPinMode() is available.&lt;p/&gt;
+              false: Disabled - Function Port_SetPinMode() is not available.
+          &lt;/html&gt;
+      </a:v>
+    </a:a>
+    <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+      <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+    </a:a>
+    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+    <a:a name="SCOPE" value="LOCAL"/>
+    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+    <a:a name="UUID" value="ECUC:d70c08e9-3595-4880-9f03-aeeca45136c7"/>
+    <a:da name="DEFAULT" value="true"/>
+  </v:var>
+
+  <!--
+  SRS ID:     ECUC_Port_00132
+  Design ID:  PortSetPinModeApi_Object
+  -->
+  <v:var name="PortSetPinModeApi" type="BOOLEAN">
+    <a:a name="LABEL" value="Port Set Pin Mode Api"/>
+    <a:a name="DESC">
+      <a:v>EN:
+          &lt;html&gt;
+              Pre-processor switch to enable / disable the use of the function Port_SetPinMode().&lt;p/&gt;
+              true: Enabled - Function Port_SetPinMode() is available.&lt;p/&gt;
+              false: Disabled - Function Port_SetPinMode() is not available.
+          &lt;/html&gt;
+      </a:v>
+    </a:a>
+    <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+      <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+    </a:a>
+    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+    <a:a name="SCOPE" value="LOCAL"/>
+    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+    <a:a name="UUID" value="ECUC:20d19fb0-1d2e-442d-8ee4-d9e913a511ae"/>
+    <a:da name="DEFAULT" value="true"/>
+  </v:var>
+
+  <!--
+  SRS ID:     ECUC_Port_HuLa_00001
+  Design ID:  PortReSetPinModeApi_Object
+  -->
+  <v:var name="PortResetPinModeApi" type="BOOLEAN">
+    <a:a name="LABEL" value="Port Reset Pin Mode Api"/>
+    <a:a name="DESC">
+        <a:v>EN:
+              &lt;html&gt;
+              Pre-processor switch to enable/disable the use of the function Port_ResetPinMode(). The function Port_ResetPinMode shall revert the port pin mode of the referenced pin to the value that was set by Port_Init operation.&lt;p/&gt;
+              &lt;/html&gt;
+        </a:v>
+      </a:a>
+    <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+      <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+    </a:a>
+    <a:a name="ORIGIN" value="HULA" />
+    <a:a name="SCOPE" value="LOCAL"/>
+    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+    <a:a name="UUID" value="ECUC:1f7dy044-d03f-43b6-863k-d9376j9d2776"/>
+    <a:da name="DEFAULT" value="false"/>
+  </v:var>
+
+  <!--
+  SRS ID:     ECUC_Port_00133
+  Design ID:  PortVersionInfoApi_Object
+  -->
+  <v:var name="PortVersionInfoApi" type="BOOLEAN">
+    <a:a name="LABEL" value="Port Version Info Api"/>
+    <a:a name="DESC">
+      <a:v>EN:
+            &lt;html&gt;
+                Pre-processor switch to enable/disable the API to read out the modules version information.&lt;p/&gt;
+                true: Enabled - Function Port_GetVersionInfo() is available.&lt;p/&gt;
+                false: Disabled - Function Port_GetVersionInfo() is not available.
+            &lt;/html&gt;
+      </a:v>
+    </a:a>
+    <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+      <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+    </a:a>
+    <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+    <a:a name="SCOPE" value="LOCAL"/>
+    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+    <a:a name="UUID" value="ECUC:1b0f5e4e-2204-4fa8-a60e-770bcc02c100"/>
+    <a:da name="DEFAULT" value="true"/>
+  </v:var>
+
+  <!--
+  SRS ID:     ECUC_Port_HuLa_00014
+  Design ID:  PortMulticoreSupport_Object
+  -->
+  <v:var name="PortMulticoreSupport" type="BOOLEAN">  
+    <a:a name="LABEL" value="Port Multicore Support"/>
+    <a:a name="DESC">
+        <a:v>EN:
+            &lt;html&gt;
+                The Port driver's multi-core feature is determined by the PortMulticoreSupport parameter.&lt;p/&gt;
+                When this parameter is disabled, no partition will be defined for any of the variants.&lt;p/&gt;
+                If PortMulticoreSupport is enabled, at least one EcucPartition must be defined for all variants.
+            &lt;/html&gt;
+        </a:v>
+    </a:a>
+    <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+    </a:a>
+    <a:a name="ORIGIN" value="HULA" />
+    <a:a name="SCOPE" value="LOCAL"/>
+    <a:a name="POSTBUILDVARIANTVALUE" value="false"/>
+    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+    <a:a name="UUID" value="ECUC:2c8c0064-2fba-4612-ab15-c819fda52ed0"/>
+    <a:da name="DEFAULT" value="false"/>
+    <a:da name="READONLY" value="true"/>
+  </v:var>
+
+  <!--
+  SRS ID:     ECUC_Port_00136
+  Design ID:  PortEcucPartitionRef_Object
+  -->
+  <v:lst name="PortEcucPartitionRef">
+    <v:ref name="PortEcucPartitionRef" type="REFERENCE">
+      <a:a name="DESC">
+          <a:v>EN:
+              &lt;html&gt;
+              Maps the Port driver to zero a multiple ECUC partitions to make the modules API available in this partition.&lt;p/&gt;
+              Tags: atp.Status=draft.
+              &lt;/html&gt;
+            </a:v>
+      </a:a>
+      <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+        <icc:v mclass="PreCompile">VariantPostBuild</icc:v>
+        <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+      </a:a>
+      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+      <a:a name="POSTBUILDVARIANTMULTIPLICITY" value="true"/>
+      <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+      <a:a name="SCOPE" value="ECU"/>
+      <a:a name="UUID" value="ECUC:8f2388c7-a82c-4bfc-81eb-d2630751b5ac"/>
+      <a:da name="REF" value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"/>
+      <a:da name="INVALID" type="XPath">
+          <a:tst expr="../../../PortGeneral/PortMulticoreSupport" false="The Port Multicore Support parameter is not enabled"/>
+          <a:tst expr="text:uniq(../*, .)" false="Duplicate Partition."/>
+          <a:tst expr="count(text:grep(node:refs('ASPathDataOfSchema:/AUTOSAR/Os')/OsApplication/*/OsAppEcucPartitionRef, .)) = 0"
+          true="User must configured EcuC partition in OS configuration before use it."/>
+          <a:tst expr="node:containsValue(../../../PortConfigSet/PortContainer/*/PortPin/*/PortPinEcucPartitionRef/*, node:value(.))"
+          false="All EcuC that have been defined. It must be used to fix this error." />
+      </a:da>
+    </v:ref>
+  </v:lst>
+
+</v:ctr>
+
+<!--
+SRS ID:     ECUC_Port_00121
+Design ID:  PortConfigSet_Object
+-->
+<v:ctr name="PortConfigSet" type="IDENTIFIABLE">
+  <a:a name="DESC">
+    <a:v>EN:
+      &lt;html&gt;
+        This container contains the configuration parameters and sub containers of the AUTOSAR Port module.
+      &lt;/html&gt;
+    </a:v>
+  </a:a>
+  <a:a name="UUID" value="ECUC:74254922-198c-4f2a-bdbd-aa04400ea97c"/>
+
+  <!--
+  SRS ID:     ECUC_Port_HuLa_00015
+  Design ID:  NotUsedPortPin_Object
+  -->
+  <v:ctr name="NotUsedPortPin" type="IDENTIFIABLE">
+    <a:a name="DESC">
+      <a:v>EN:
+        &lt;html&gt;
+          The init parameters values for the not used pins in the PORT configuration.
+        &lt;/html&gt;
+      </a:v>
+    </a:a>
+    <a:a name="UUID" value="ECUC:47c93e8f-38dc-4b88-a989-167c7b7f11d5"/>
+
+    <!--
+    SRS ID:     ECUC_Port_HuLa_00011
+    Design ID:  PortPinDefaultPullType_Object
+    -->
+    <v:var name="PortPinDefaultPullType" type="ENUMERATION">
+      <a:a name="DESC">
+        <a:v>EN:
+            &lt;html&gt;
+              Select the Pull type for current UnUsed Pin.&lt;p/&gt;
+              PIN_PULLDN_ON: The internal pull-down resistor is enabled.&lt;p/&gt;
+              PIN_PULL_OFF: The internal pull up/down register is disabled.
+            &lt;/html&gt;</a:v>
+      </a:a>
+      <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+          <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+      </a:a>
+      <a:a name="ORIGIN" value="HULA" />
+      <a:a name="SCOPE" value="LOCAL"/>
+      <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+      <a:a name="UUID" value="ECUC:f50ad7ac-01bc-4f1a-b757-7a533023df5c"/>
+      <a:da name="DEFAULT" value="PIN_PULLDN_ON"/>
+      <a:da name="RANGE">
+          <a:v>PIN_PULLDN_ON</a:v>
+          <a:v>PIN_PULL_OFF</a:v>
+      </a:da>
+    </v:var>
+  </v:ctr>
+
+  <!--
+  SRS ID:     ECUC_Port_00122
+  Design ID:  PortContainer_Object
+  -->
+  <v:lst name="PortContainer" type="MAP">
+    <a:da name="MIN" value="1"/>
+    <!--
+    SRS ID:     ECUC_Port_00122
+    Design ID:  PortContainer_Object
+    -->
+    <v:ctr name="PortContainer" type="IDENTIFIABLE">
+      <a:a name="DESC">
+        <a:v>EN:
+          &lt;html&gt;
+            Container collecting the PortPins.
+          &lt;/html&gt;
+        </a:v>
+      </a:a>
+      <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+        <icc:v mclass="PreCompile">VariantPostBuild</icc:v>
+        <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+      </a:a>
+      <a:v name="LOWER-MULTIPLICITY" value="1"/>
+      <a:v name="UPPER-MULTIPLICITY" value="*"/>
+      <a:a name="UUID" value="ECUC:f0910258-b31b-4fea-b094-d74e928ed415"/>
+
+      <!--
+      SRS ID:     ECUC_Port_00124
+      Design ID:  NumberOfPortPins_Object
+      -->
+      <v:var name="NumberOfPortPins" type="INTEGER">
+        <a:a name="DESC">
+          <a:v>EN:
+            &lt;html&gt;
+              The number of specified PortPins in this PortContainer.
+            &lt;/html&gt;</a:v>
+        </a:a>
+        <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+          <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+        </a:a>
+        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+        <a:a name="SCOPE" value="LOCAL"/>
+        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+        <a:a name="UUID" value="ECUC:fb9252d0-d013-48d8-9f3d-26428071ddc0"/>
+        <a:da name="DEFAULT" type="XPath">
+            <a:tst expr="num:i(count(node:fallback(node:current()/../PortPin/*,text:split('1 2 3'))))"/>
+        </a:da>
+        <a:da name="INVALID" type="Range">
+          <a:tst expr="&gt;=1"/>
+          <a:tst expr="&lt;= 100"/>
+        </a:da>
+        <a:da name="RANGE" type="XPath">
+            <a:tst expr="node:fallback(., 1) = count(node:fallback(node:current()/../PortPin/*,text:split('1 2 3')))" false="Please Press button Calculate value or mannual type number that mapping with number of Pin."/>
+        </a:da>
+      </v:var>
+
+      <!--
+      SRS ID:     ECUC_Port_00118
+      Design ID:  PortPin_Object
+      -->
+      <v:lst name="PortPin" type="MAP">
+        <a:da name="MIN" value="1"/>
+        <v:ctr name="PortPin" type="IDENTIFIABLE">
+          <a:a name="DESC">
+            <a:v>EN:
+              &lt;html&gt;
+                Configuration of the individual port pins.
+              &lt;/html&gt;</a:v>
+          </a:a>
+          <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+            <icc:v mclass="PreCompile">VariantPostBuild</icc:v>
+            <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+          </a:a>
+          <a:v name="LOWER-MULTIPLICITY" value="1"/>
+          <a:v name="UPPER-MULTIPLICITY" value="*"/>
+          <a:a name="UUID" value="ECUC:25203f98-46c8-4d9a-a89c-4e3b5825825c"/>
+
+          <!--
+          SRS ID:     ECUC_Port_00126
+          Design ID:  PortPinDirectionChangeable_Object
+          -->
+          <v:var name="PortPinDirectionChangeable" type="BOOLEAN">
+            <a:a name="DESC">
+              <a:v>EN:
+                &lt;html&gt;
+                  Parameter to indicate if the direction is changeable on a port pin during runtime.&lt;p/&gt;
+                  true: Port Pin direction changeable enabled.&lt;p/&gt;
+                  false: Port Pin direction changeable disabled.
+                &lt;/html&gt;</a:v>
+            </a:a>
+            <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+              <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+            </a:a>
+            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+            <a:a name="SCOPE" value="LOCAL"/>
+            <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+            <a:a name="UUID" value="ECUC:f4ad5384-f832-471a-86ed-7684c0b829a6"/>
+            <a:da name="DEFAULT" value="false"/>
+            <a:da name="EDITABLE" type="XPath">
+              <a:tst expr="(node:value(../PortPinType) = 'ANALOG')" true="false" false="true"/>
+            </a:da>
+          </v:var>
+
+          <!--
+          SRS ID:     ECUC_Port_00134
+          Design ID:  PortPinModeChangeable_Object
+          -->
+          <v:var name="PortPinModeChangeable" type="BOOLEAN">
+            <a:a name="DESC">
+              <a:v>EN:
+                &lt;html&gt;
+                  Parameter to indicate if the mode is changeable on a port pin during runtime.&lt;p/&gt;
+                  true: Port pin mode changeable allowed&lt;p/&gt;
+                  false: Port Pin mode changeable not permitted.&lt;p/&gt;
+                &lt;/html&gt;</a:v>
+            </a:a>
+            <a:a name="IMPLEMENTATIONCONFIGCLASS"
+              type="IMPLEMENTATIONCONFIGCLASS">
+              <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+            </a:a>
+            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+            <a:a name="SCOPE" value="LOCAL"/>
+            <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+            <a:a name="UUID" value="ECUC:379acabd-7917-48d4-a056-fd39a963f0d0"/>
+            <a:da name="DEFAULT" value="true"/>
+            <a:da name="EDITABLE" type="XPath">
+              <a:tst expr="(node:value(../PortPinType) = 'ANALOG')" true="false" false="true"/>
+            </a:da>
+          </v:var>
+          
+          <!--
+          SRS ID:     ECUC_Port_HuLa_00002
+          Design ID:  PortDebugPin_Object
+          -->
+          <v:var name="PortDebugPin" type="BOOLEAN">
+            <a:a name="DESC">
+              <a:v>EN:
+                &lt;html&gt;
+                  Enable or disable the debug function for current portpin.&lt;p/&gt;
+                  true: Enable the debug function.&lt;p/&gt;
+                  false: Disable the debug function.
+                &lt;/html&gt;</a:v>
+            </a:a>
+            <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+            </a:a>
+            <a:a name="ORIGIN" value="HULA" />
+            <a:a name="SCOPE" value="LOCAL"/>
+            <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+            <a:a name="UUID" value="ECUC:12f5e670-de63-482b-8385-e1595db4c251"/>
+            <a:da name="DEFAULT" value="false"/>
+            <a:da name="EDITABLE" type="XPath">
+                <a:tst expr="((node:value(../PortPinName) = 'PA_13') or (node:value(../PortPinName) = 'PA_14') or (node:value(../PortPinName) = 'PA_15') or (node:value(../PortPinName) = 'PB_03') or (node:value(../PortPinName) = 'PB_04'))" true ="true" false ="false"/>
+            </a:da>
+          </v:var>
+
+          <!--
+          SRS ID:     ECUC_Port_HuLa_00003
+          Design ID:  PortPinOutputLatch_Object
+          -->
+          <v:var name="PortPinOutputLatch" type="BOOLEAN">
+            <a:a name="DESC">
+              <a:v>EN:
+                  &lt;html&gt;
+                      Enable or disable the output latch function to latch output. Configure the GPIOx_BSRR register field.&lt;p/&gt;
+                      true: Enable to latch output.&lt;p/&gt;
+                      false: Disable to latch output.
+                  &lt;/html&gt;</a:v>
+            </a:a>
+            <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+            </a:a>
+            <a:a name="ORIGIN" value="HULA" />
+            <a:a name="SCOPE" value="LOCAL"/>
+            <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+            <a:a name="UUID" value="ECUC:9751e341-79e0-4f6a-b78b-7c0711268486"/>
+            <a:da name="DEFAULT" value="false"/>
+            <a:da name="INVALID" type="XPath">
+                <a:tst expr="((node:value(../PortPinDirection) = 'PORT_PIN_IN') and (node:value(.) = 'true'))" true="you must select Direction to OUT or INOUT"/>
+            </a:da>
+            <a:da name="EDITABLE" type="XPath">
+              <a:tst expr="((../PortPinDirection = 'PORT_PIN_OUT') or (../PortPinDirection = 'PORT_PIN_INOUT'))" true="true" false="false"/>
+              <a:tst expr="(node:value(../PortPinType) = 'ANALOG')" true="false" false="true"/>
+            </a:da>
+          </v:var>
+
+          <!--
+          SRS ID:     ECUC_Port_HuLa_00022
+          Design ID:  PortPinName_Object
+          -->
+          <v:var name="PortPinName" type="ENUMERATION">
+            <a:a name="DESC">
+              <a:v>EN:
+                    &lt;html&gt;
+                        Selects one of the Port Pin available on the platform to configure the current pin.&lt;p/&gt;
+                        Each Pin can flexibly change depend on Hardware.&lt;p/&gt;
+                    &lt;/html&gt;</a:v>
+            </a:a> 
+            <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+            </a:a>
+            <a:a name="ORIGIN" value="HULA" />
+            <a:a name="SCOPE" value="LOCAL"/>
+            <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+            <a:a name="UUID" value="ECUC:95f8cfe8-a663-4ed1-ac68-50c1cef49157"/>
+            <a:da name="DEFAULT" type="XPath" expr="(ecu:list('Port.PinName'))[position()-1=node:fallback(node:current()/../@index,'0')]"></a:da>
+            <a:da name="RANGE" type="XPath" expr="ecu:list('Port.PinName')"/>
+            <a:da name="INVALID" type="XPath">
+              <a:tst expr="text:uniq((node:fallback(../../../../*/PortPin/*/PortPinName,text:split('1 2 3'))), node:fallback(.,0))" false="Duplicate pin configuration."/>
+              <a:tst expr="text:match((node:fallback(as:modconf('Port')[1]/PortConfigSet/UnTouchedPortPin/*/UnTouchedPortPinName,text:split('1 2 3'))), node:fallback(.,0))" true="This pin cannot be touched."/>
+              <a:tst expr="text:match((node:fallback(as:modconf('Port')[1]/PortConfigSet/UnUsedPortPin/*/UnUsedPortPinName,text:split('1 2 3'))), node:fallback(.,0))" true="This pin cannot be used."/>
+            </a:da>
+          </v:var>
+
+          <!--
+          SRS ID:     ECUC_Port_HuLa_00005
+          Design ID:  PortPinType_Object
+          -->
+          <v:var name="PortPinType" type="ENUMERATION">
+            <a:a name="DESC">
+              <a:v>EN:
+                  &lt;html&gt;
+                      Select digital function.&lt;p/&gt;
+                      The digital function is including input buffer, output buffer and also pull registors.&lt;p/&gt;
+                      DIGITAL: Digital enable.&lt;p/&gt;
+                      ANALOG: Analog enable.&lt;p/&gt;
+                  &lt;/html&gt;</a:v>
+            </a:a>
+            <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+            </a:a>
+            <a:a name="ORIGIN" value="HULA" />
+            <a:a name="SCOPE" value="LOCAL"/>
+            <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+            <a:a name="UUID" value="ECUC:f49028aa-1985-405a-a5a6-fea1681c7c6e"/>
+            <a:da name="DEFAULT" value="DIGITAL"/>
+            <a:da name="RANGE">
+                <a:v>DIGITAL</a:v>
+                <a:v>ANALOG</a:v>
+            </a:da>
+          </v:var>
+
+          <!--
+          SRS ID:     ECUC_Port_00125, ECUC_Port_HuLa_00004
+          Design ID:  PortPinDirection_Object
+          -->
+          <v:var name="PortPinDirection" type="ENUMERATION">
+            <a:a name="DESC">
+              <a:v>EN:
+                  &lt;html&gt;
+                      Selects the initial direction of the pin (IN ,OUT or INOUT).&lt;p/&gt;
+                      If the direction is not changeable, the value configured here is fixed.&lt;p/&gt;
+                      For the GPIO Function modes the INOUT pin direction is hw selected.&lt;p/&gt;
+                      For the Alternative Function modes the direction depended on the selected function for that pin.&lt;p/&gt;
+                      PORT_PIN_IN: Input mode selected.&lt;p/&gt;
+                      PORT_PIN_OUT: Output mode selected.&lt;p/&gt;
+                      PORT_PIN_INOUT: In-Out mode selected.
+                  &lt;/html&gt;</a:v>
+            </a:a>
+            <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+              <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+            </a:a>
+            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+            <a:a name="SCOPE" value="LOCAL"/>
+            <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+            <a:a name="UUID" value="ECUC:0daa945d-4c60-4d70-b79e-e806b6eb1521"/>
+            <a:da name="DEFAULT" value="PORT_PIN_IN">
+            </a:da>
+            <a:da name="RANGE">
+              <a:v>PORT_PIN_IN</a:v>
+              <a:v>PORT_PIN_OUT</a:v>
+              <a:v>PORT_PIN_INOUT</a:v>
+            </a:da>
+            <a:da name="EDITABLE" type="XPath">
+              <a:tst expr="(node:value(../PortPinType) = 'ANALOG')" true="false" false="true"/>
+            </a:da>
+          </v:var>
+
+          <!--
+          SRS ID:     ECUC_Port_00130, ECUC_Port_HuLa_00016
+          Design ID:  PortPinMode_Object
+          -->
+          <v:var name="PortPinMode" type="ENUMERATION">
+            <a:a name="DESC">
+              <a:v>EN:
+                    &lt;html&gt;
+                    Port pin mode from mode list(ALF Function).&lt;p/&gt;
+                    Note that more than one mode is allowed by default. 
+                  &lt;/html&gt;</a:v>
+            </a:a> 
+            <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+            </a:a>
+            <a:a name="ORIGIN" value="HULA" />
+            <a:a name="SCOPE" value="LOCAL"/>
+            <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+            <a:a name="UUID" value="ECUC:26e74eb3-24f4-4fd1-9bf9-9f2017b39657"/>
+            <a:da name="DEFAULT" value="GPI"/>
+            <a:da name="RANGE" type="XPath" expr="ecu:list(concat('Port.', string(node:fallback(../PortPinDirection,'PORT_PIN_IN')),'.',string(node:fallback(../PortPinName,'PA_00'))))"/>
+            <a:da name="EDITABLE" type="XPath">
+              <a:tst expr="(node:value(../PortPinType) = 'ANALOG')" true="false" false="true"/>
+            </a:da>
+          </v:var>
+
+          <!--
+          SRS ID:     ECUC_Port_HuLa_00017
+          Design ID:  InterruptExternal_Object
+          -->
+          <v:var name="InterruptExternal" type="ENUMERATION">
+            <a:a name="DESC">
+              <a:v>EN:
+                  &lt;html&gt;
+                      External Interrupt Falling Rising type selection.&lt;p/&gt;
+                      PIN_IT_OFF: The External Interrupt is diabled.&lt;p/&gt;
+                      PIN_IT_FT: The External Interrupt is Falling.&lt;p/&gt;
+                      PIN_IT_RT: The External Interrupt is Rising.&lt;p/&gt;
+                      PIN_IT_RFT: The External Interrupt is Falling and Rising.
+                  &lt;/html&gt;</a:v>
+            </a:a>
+            <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+            </a:a>
+            <a:a name="ORIGIN" value="HULA" />
+            <a:a name="SCOPE" value="LOCAL"/>
+            <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+            <a:a name="UUID" value="ECUC:e2420ba7-2a95-4760-8d6f-31d961bcf508"/>
+            <a:da name="DEFAULT" value="PIN_IT_OFF"/>
+            <a:da name="RANGE">
+                <a:v>PIN_IT_OFF</a:v>
+                <a:v>PIN_IT_FT</a:v>
+                <a:v>PIN_IT_RT</a:v>
+                <a:v>PIN_IT_RFT</a:v>
+            </a:da>
+            <a:da name="EDITABLE" type="XPath">
+              <a:tst expr="(node:value(../PortPinMode) = 'GPI')" true="true" false="false"/>
+              <a:tst expr="(node:value(../PortPinDirection) = 'PORT_PIN_IN')" true="true" false="false"/>
+            </a:da>
+          </v:var>
+
+          <!--
+          SRS ID:     ECUC_Port_HuLa_00006
+          Design ID:  PortPinPullType_Object
+          -->
+          <v:var name="PortPinPullType" type="ENUMERATION">
+            <a:a name="DESC">
+              <a:v>EN:
+                  &lt;html&gt;
+                      Pull type selection.&lt;p/&gt;
+                      PIN_PULL_OFF: The Internal pull registor is diabled.&lt;p/&gt;
+                      PIN_PULLUP_ON: The internal pull-up resistor is enabled.&lt;p/&gt;
+                      PIN_PULLDN_ON: The internal pull-down resistor is enabled.
+                  &lt;/html&gt;</a:v>
+            </a:a>
+            <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+            </a:a>
+            <a:a name="ORIGIN" value="HULA" />
+            <a:a name="SCOPE" value="LOCAL"/>
+            <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+            <a:a name="UUID" value="ECUC:e2420ba7-2a95-4760-8d6f-31d961bcf508"/>
+            <a:da name="DEFAULT" value="PIN_PULL_OFF"/>
+            <a:da name="RANGE">
+                <a:v>PIN_PULL_OFF</a:v>
+                <a:v>PIN_PULLUP_ON</a:v>
+                <a:v>PIN_PULLDN_ON</a:v>
+            </a:da>
+            <a:da name="EDITABLE" type="XPath">
+              <a:tst expr="(node:value(../PortPinType) = 'ANALOG')" true="false" false="true"/>
+              <a:tst expr="(node:value(../PortPinDirection) = 'PORT_PIN_OUT')" true="false" false="true"/>
+            </a:da>
+          </v:var>
+
+          <!--
+          SRS ID:     ECUC_Port_HuLa_00017
+          Design ID:  PortPinSpeed_Object
+          -->
+          <v:var name="PortPinSpeed" type="ENUMERATION">
+            <a:a name="DESC">
+              <a:v>EN:
+                  &lt;html&gt;
+                      The initial speed level type of the pin (LOW, MEDIUM, FAST or HIGH).&lt;p/&gt;
+                      PIN_OUT_SPEED_LOW: Low speed.&lt;p/&gt;
+                      PIN_OUT_SPEED_MEDIUM: Medium speed.&lt;p/&gt;
+                      PIN_OUT_SPEED_FAST: Fast speed.&lt;p/&gt;
+                      PIN_OUT_SPEED_HIGH: High speed.
+                  &lt;/html&gt;</a:v>
+            </a:a>
+            <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+            </a:a>
+            <a:a name="ORIGIN" value="HULA" />
+            <a:a name="SCOPE" value="LOCAL"/>
+            <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+            <a:a name="UUID" value="ECUC:75018efc-f5a3-4d8e-8d25-af75294dfc09"/>
+            <a:da name="DEFAULT" value="PIN_OUT_SPEED_FAST"/>
+            <a:da name="RANGE">
+                <a:v>PIN_OUT_SPEED_LOW</a:v>
+                <a:v>PIN_OUT_SPEED_MEDIUM</a:v>
+                <a:v>PIN_OUT_SPEED_FAST</a:v>
+                <a:v>PIN_OUT_SPEED_HIGH</a:v>
+            </a:da>
+            <a:da name="EDITABLE" type="XPath">
+              <a:tst expr="((../PortPinDirection = 'PORT_PIN_OUT') or (../PortPinDirection = 'PORT_PIN_INOUT'))" true="true" false="false"/>
+              <a:tst expr="(node:value(../PortPinDirection) = 'PORT_PIN_OUT')" true="true" false="false"/>
+            </a:da>
+          </v:var>
+
+          <!--
+          SRS ID:     ECUC_Port_00129
+          Design ID:  PortPinLevelValue_Object
+          -->
+          <v:var name="PortPinLevelValue" type="ENUMERATION">
+            <a:a name="DESC">
+              <a:v>EN:
+                  &lt;html&gt;
+                      Port Pin Level value from Port pin list.&lt;p/&gt;
+                      PORT_PIN_LEVEL_HIGH: Port Pin level is High.&lt;p/&gt;
+                      PORT_PIN_LEVEL_LOW: Port Pin level is Low.&lt;p/&gt;
+                  &lt;/html&gt;</a:v>
+            </a:a>
+            <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+              <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+            </a:a>
+            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+            <a:a name="SCOPE" value="LOCAL"/>
+            <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+            <a:a name="UUID" value="ECUC:d240aed1-97b6-434b-bfe8-1c4251d5dbe3"/>
+            <a:da name="DEFAULT" value="PIN_OUT_LOW"/>
+            <a:da name="RANGE">
+              <a:v>PIN_OUT_LOW</a:v>
+              <a:v>PIN_OUT_HIGH</a:v>
+            </a:da>
+            <a:da name="EDITABLE" type="XPath">
+                <a:tst expr="((../PortPinDirection = 'PORT_PIN_OUT') or (../PortPinDirection = 'PORT_PIN_INOUT'))" true="true" false="false"/>
+                <a:tst expr="(node:value(../PortPinType) = 'ANALOG')" true="false" false="true"/>
+              </a:da>
+            <a:da name="INVALID" type="XPath">
+                <a:tst expr="((node:value(../PortPinDirection) = 'PORT_PIN_IN') and (node:value(.) = 'PIN_OUT_HIGH'))" true="PortPin Level Value only valid in OUT and INOUT Direction"/>
+            </a:da>
+          </v:var>
+
+          <!--
+          SRS ID:     ECUC_Port_HuLa_00007
+          Design ID:  PortPinOutputType_Object
+          -->
+          <v:var name="PortPinOutputType" type="ENUMERATION">
+            <a:a name="DESC">
+              <a:v>EN:
+                  &lt;html&gt;
+                      Select output open drain for Port Pin.&lt;p/&gt;
+                      PIN_OUT_TYPE_PP: Push-pull Mode.&lt;p/&gt;
+                      PIN_OUT_TYPE_OD: PMOS open-drain mode.
+                  &lt;/html&gt;</a:v>
+            </a:a>
+            <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+            </a:a>
+            <a:a name="ORIGIN" value="HULA" />
+            <a:a name="SCOPE" value="LOCAL"/>
+            <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+            <a:a name="UUID" value="ECUC:cb2bb579-c42d-4805-b558-bc5a670faf20"/>
+            <a:da name="DEFAULT" value="PIN_OUT_TYPE_PP"/>
+            <a:da name="RANGE">
+                <a:v>PIN_OUT_TYPE_PP</a:v>
+                <a:v>PIN_OUT_TYPE_OD</a:v>
+            </a:da>
+            <a:da name="EDITABLE" type="XPath">
+                <a:tst expr="((../PortPinDirection = 'PORT_PIN_OUT') or (../PortPinDirection = 'PORT_PIN_INOUT') )" true="true" false="false"/>
+                <a:tst expr="(node:value(../PortPinType) = 'ANALOG')" true="false" false="true"/>
+              </a:da>
+            <!-- <a:da name="INVALID" type="XPath">
+                <a:tst expr="((node:value(../PortPinDirection) = 'PORT_PIN_IN') and (node:value(.) != 'PIN_OUT_TYPE_PP'))" true="you must change OpenDrain to PIN_OUT_TYPE_PP when Direction is IN"/>
+            </a:da> -->
+          </v:var>
+
+          <!--
+          SRS ID:     ECUC_Port_00127
+          Design ID:  PortPinId_Object
+          -->
+          <v:var name="PortPinId" type="INTEGER">
+            <a:a name="DESC">
+              <a:v>EN:
+                  &lt;html&gt;
+                      Pin Id of the port pin.&lt;p/&gt;
+                      This value will be assigned to the symbolic name.&lt;p/&gt;
+                      derived from the port pin container short name.
+                  &lt;/html&gt;</a:v>
+            </a:a>
+            <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+              <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+            </a:a>
+            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+            <a:a name="SCOPE" value="LOCAL"/>
+            <a:a name="SYMBOLICNAMEVALUE" value="true"/>
+            <a:a name="UUID" value="ECUC:6fc7cdd4-a403-4df8-af9b-8c7754f2b0f5"/>
+            <a:da name="DEFAULT" type="XPath" expr="num:i((node:fallback(node:current()/../@index, '1')) + 1 + (count(node:fallback(../../../../*/PortPin/*/PortPinId,text:split('1 2 3')))) - count(node:fallback(../../*,text:split('1 2 3'))))"/>
+            <a:da name="INVALID" type="Range">
+                <a:tst expr="&gt;=1"/>
+                <a:tst expr="&lt;=100"/>
+            </a:da>
+            <a:da name="RANGE" type="XPath">
+                <a:tst expr="node:fallback(., 0) &lt; (count(node:fallback(../../../../*/PortPin/*, text:split('1 2 3'))) + 1)" false="The value of PortPinId must be less than the number of configued pins (NumberOfPortPins)."/>
+                <a:tst expr="text:uniq((node:fallback(../../../../*/PortPin/*/PortPinId,text:split('1 2 3'))), node:fallback(.,0))" false="The value of PortPinId must be unique, user must press calculate value or manually type to sync up PortPinId number."/>
+            </a:da>
+          </v:var>
+
+          <!--
+          SRS ID:     ECUC_Port_00128, ECUC_Port_HuLa_00001
+          Design ID:  PortPinInitialMode_Object
+          -->
+          <v:var name="PortPinInitialMode" type="ENUMERATION">
+            <a:a name="DESC">
+              <a:v>EN:
+                  &lt;html&gt;
+                      Port pin mode from mode list for use with Port_Init() function.&lt;p/&gt;
+                      Selects the PORT pin mode from the modes list. One or more modes may be valid for a pin. This way it is
+                      possible to select between multiple modes.( e.g. GPIO, EVENTOUT, ...).&lt;p/&gt;
+                      NOTE: This parameter is not used in the current implementation and is retained as per std.
+                      AUTOSAR_EcucParamDef.arxml file.
+                  &lt;/html&gt;</a:v>
+            </a:a>
+            <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                  type="IMPLEMENTATIONCONFIGCLASS">
+              <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+            </a:a>
+            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+            <a:a name="SCOPE" value="LOCAL"/>
+            <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+            <a:a name="UUID" value="ECUC:c4bc7fd7-629b-485c-ba67-8d3dcf6b03be"/>
+            <a:da name="READONLY" value="true"/>
+            <a:da name="DEFAULT" value="GPIO"/>
+              <a:da name="RANGE">
+                <a:v>GPIO</a:v>
+              </a:da>
+          </v:var>
+
+          <!--
+          SRS ID:     ECUC_Port_00137
+          Design ID:  PortPinEcucPartitionRef_Object
+          -->
+          <v:lst name="PortPinEcucPartitionRef">
+            <a:da name="INVALID" type="XPath">
+              <a:tst expr="(num:i(count(./*)) = 0) and (num:i(count(../../../../../../PortGeneral/PortEcucPartitionRef/*)) > 0)" true="At least one partition need to be defined in PortPinEcucPartitionRef"/>
+            </a:da>
+            <v:ref name="PortPinEcucPartitionRef" type="REFERENCE">
+              <a:a name="DESC">
+                <a:v>EN: Maps the Port pin to zero a multiple ECUC partitions. The ECUC partitions referenced are a subset of the ECUC partitions where the Port driver is mapped to.</a:v>
+                <a:v>EN: Tags: atp.Status=draft</a:v>
+              </a:a>
+              <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                <icc:v mclass="PreCompile">VariantPostBuild</icc:v>
+                <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+                <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+              </a:a>
+              <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+              <a:a name="POSTBUILDVARIANTMULTIPLICITY" value="true"/>
+              <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+              <a:a name="SCOPE" value="ECU"/>
+              <a:a name="UUID" value="ECUC:028d5194-21e6-4ef1-9ac9-42690e968925"/>
+              <a:da name="REF" value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/EcuC/EcucPartitionCollection/EcucPartition"/>
+              <a:da name="INVALID" type="XPath">
+                <a:tst expr="text:uniq(../*, .)" false="Must be make Partition to unique value"/>
+                <a:tst expr="count(text:grep(../../../../../../../PortGeneral/PortEcucPartitionRef/*,.)) > 0"
+                  false="User must configure EcuC partition on PortEcucPartitionRef location."/>
+              </a:da>
+            </v:ref>
+          </v:lst>
+
+        </v:ctr>
+      </v:lst>
+
+    </v:ctr>
+  </v:lst>
+
+
+  <!--
+  SRS ID:     ECUC_Port_HuLa_00010
+  Design ID:  UnTouchedPortPin_Object
+  -->
+  <v:lst name="UnTouchedPortPin" type="MAP">
+    <a:da name="MIN" value="0"/>
+    <v:ctr name="UnTouchedPortPin" type="IDENTIFIABLE">
+      <a:a name="DESC">
+      <a:v>EN:
+        &lt;html&gt;
+            Choosing the options will leave the pins Untouched.
+        &lt;/html&gt;</a:v>
+      </a:a>
+      <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+        <icc:v mclass="PreCompile">VariantPostBuild</icc:v>
+        <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+      </a:a>
+      <a:v name="LOWER-MULTIPLICITY" value="1"/>
+      <a:v name="UPPER-MULTIPLICITY" value="*"/>
+      <a:a name="UUID" value="ECUC:b3d4c3da-b7ca-46a8-9eaf-a0ad36f1c786"/>
+
+      <!--
+      SRS ID:     ECUC_Port_HuLa_00012
+      Design ID:  UnTouchedPortPinName_Object
+      -->
+      <v:var name="UnTouchedPortPinName" type="ENUMERATION">
+        <a:a name="DESC">
+          <a:v>EN:
+              &lt;html&gt;
+                  Selects one of the Port Pin available on the platform to configure the current pin.&lt;p/&gt;
+                  Each Pin can flexibly change depend on Hardware.&lt;p/&gt;
+              &lt;/html&gt;</a:v>
+        </a:a> 
+        <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+            <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+        </a:a>
+        <a:a name="ORIGIN" value="HULA" />
+        <a:a name="SCOPE" value="LOCAL"/>
+        <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+        <a:a name="UUID" value="ECUC:360c6ef8-f557-4f20-ae71-259267ab3a56"/>
+        <a:da name="DEFAULT" type="XPath" expr="(ecu:list('Port.PinName'))[position()-1=node:fallback(node:current()/../@index,'0')]"></a:da>
+        <a:da name="RANGE" type="XPath" expr="ecu:list('Port.PinName')"/>
+        <a:da name="INVALID" type="XPath">
+          <a:tst expr="text:uniq(../../*/UnTouchedPortPinName, .)" false="Duplicate pin configuration"/>
+        </a:da>
+      </v:var>
+
+    </v:ctr>
+  </v:lst>
+
+  <!--
+  SRS ID:     ECUC_Port_HuLa_00009
+  Design ID:  UnUsedPortPin_Object
+  -->
+  <v:lst name="UnUsedPortPin" type="MAP">
+    <a:da name="MIN" value="0"/>
+    <v:ctr name="UnUsedPortPin" type="IDENTIFIABLE">
+      <a:a name="DESC">
+        <a:v>EN:
+          &lt;html&gt;
+                Contains a list of Pins that are not used by the Port_Init() function.
+          &lt;/html&gt;</a:v>
+      </a:a>
+      <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+        <icc:v mclass="PreCompile">VariantPostBuild</icc:v>
+        <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+      </a:a>
+      <a:v name="LOWER-MULTIPLICITY" value="1"/>
+      <a:v name="UPPER-MULTIPLICITY" value="*"/>
+      <a:a name="UUID"
+          value="ECUC:85012407-6c90-405d-934f-f4399cbdc44a"/>
+
+      <!--
+      SRS ID:     ECUC_Port_HuLa_00013
+      Design ID:  UnUsedPortPinName_Object
+      -->
+      <v:var name="UnUsedPortPinName" type="ENUMERATION">
+        <a:a name="DESC">
+          <a:v>EN:
+          &lt;html&gt;
+              Select one of the PortPins will not be used.
+          &lt;/html&gt;</a:v>
+        </a:a>
+        <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                  <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+        </a:a>
+        <a:a name="ORIGIN" value="HULA" />
+        <a:a name="SCOPE" value="LOCAL"/>
+        <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+        <a:a name="UUID" value="ECUC:57d4b088-f0d9-4b6f-a6e4-b20f57cdcc3e"/>
+        <a:da name="DEFAULT" type="XPath" expr="(ecu:list('Port.PinName'))[position()-1=node:fallback(node:current()/../@index,'0')]"></a:da>
+        <a:da name="RANGE" type="XPath" expr="ecu:list('Port.PinName')"/>
+        <a:da name="INVALID" type="XPath">
+          <a:tst expr="text:uniq(../../*/UnUsedPortPinName, .)" false="Duplicate pin configuration"/>
+          <a:tst expr="text:match((node:fallback(as:modconf('Port')[1]/PortConfigSet/UnTouchedPortPin/*/UnTouchedPortPinName,text:split('1 2 3'))), node:fallback(.,0))" true="This pin cannot be touched."/>
+        </a:da>
+      </v:var>
+
+    </v:ctr>
+  </v:lst>
+
+
+</v:ctr>
+
+
+                <d:ref type="REFINED_MODULE_DEF" value="ASPath:/AUTOSAR/EcucDefs/Port"/>
+              </v:ctr>
+            </d:chc>
+
+            <d:chc name="Port_EcuParameterDefinition"
+                  type="AR-ELEMENT" value="ECU_PARAMETER_DEFINITION">
+              <d:ctr type="AR-ELEMENT">
+              <a:a name="UUID" value="ECUC:b8a1e624-8430-49aa-b2d9-44a33ffd1aa8"/>
+                <a:a name="DEF"
+                    value="ASPath:/AR_PACKAGE_SCHEMA/ECU_PARAMETER_DEFINITION"/>
+                <d:lst name="MODULE_REF">
+                  <d:ref type="MODULE_REF" value="ASPath:/AUTOSAR/Port"/>
+                </d:lst>
+              </d:ctr>
+            </d:chc>
+
+
+            <d:chc name="Port_ModuleDescription"
+                  type="AR-ELEMENT" value="BSW_MODULE_DESCRIPTION">
+              <d:ctr type="AR-ELEMENT">
+                <a:a name="DEF"
+                    value="ASPath:/AR_PACKAGE_SCHEMA/BSW_MODULE_DESCRIPTION"/>
+                <d:var name="MODULE_ID" type="INTEGER" >
+                  <a:a name="EDITABLE" value="false"/>
+                  <a:a name="IMPORTER_INFO" value="@DEF"/>
+                </d:var>
+                <d:ref type="RECOMMENDED_CONFIGURATION" >
+                  <a:a name="EDITABLE" value="false"/>
+                  <a:a name="IMPORTER_INFO" value="@DEF"/>
+                </d:ref>
+                <d:ref type="PRE_CONFIGURED_CONF" >
+                  <a:a name="EDITABLE" value="false"/>
+                  <a:a name="IMPORTER_INFO" value="@DEF"/>
+                </d:ref>
+                <d:ref type="VENDOR_SPECIFIC_MODULE_DEF"
+                      value="ASPath:/AUTOSAR/Port"/>
+              </d:ctr>
+            </d:chc>
+
+          </d:lst>
+        </d:ctr>
+      </d:lst>
+  </d:ctr>
+</datamodel>
