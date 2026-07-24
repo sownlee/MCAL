@@ -1,9 +1,9 @@
 /***********************************************************************************************************************
  * Project Name: HuLa STM
  * 
- * File Name: Dio_Ipc.h
+ * File Name: Dio_Gpio_Ip.h
  *
- * Description: Implementation of Dio_Ipc IPC Level layer
+ * Description: Implementation of Dio_Gpio_Ip IP Level layer
  *              
  * AutoSAR Version:         4.4.0
  *
@@ -15,8 +15,8 @@
  *
  **********************************************************************************************************************/
 
-#ifndef DIO_IPC_H
-#define DIO_IPC_H
+#ifndef DIO_GPIO_IP_H
+#define DIO_GPIO_IP_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -26,8 +26,9 @@ extern "C" {
  *                                                     INCLUDES 
  **********************************************************************************************************************/
 
-#include "Dio_Gpio_Ip.h"
-#include "Dio_Ipc_Cfg.h"
+#include "Port_Hw.h"
+#include "Dio_Gpio_Ip_Cfg.h"
+
 
 /***********************************************************************************************************************
  *                                                 SOURCE FILE VERSION
@@ -41,11 +42,6 @@ extern "C" {
  *                                                   LOCAL MACROS
  **********************************************************************************************************************/
 
-#define START_CONFIG_DATA_UNSPECIFIED
-#include "MemMap.h"
-    DIO_IPC_CONFIG_PC
-#define STOP_CONFIG_DATA_UNSPECIFIED
-#include "MemMap.h"
 
 /***********************************************************************************************************************
  *                                       LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
@@ -58,6 +54,12 @@ extern "C" {
 /***********************************************************************************************************************
  *                                                  LOCAL CONSTANTS
  **********************************************************************************************************************/
+
+#define START_CONFIG_DATA_UNSPECIFIED
+#include "MemMap.h"
+    DIO_IP_CONFIG_PC
+#define STOP_CONFIG_DATA_UNSPECIFIED
+#include "MemMap.h"
 
 /***********************************************************************************************************************
  *                                                  LOCAL VARIABLES
@@ -84,6 +86,6 @@ extern "C" {
 }
 #endif
 
-#endif /* DIO_IPC_H */
+#endif /* DIO_GPIO_IP_H */
 
 /*--------------------------------------------------- EOF ------------------------------------------------------------*/

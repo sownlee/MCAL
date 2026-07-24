@@ -17,8 +17,8 @@
  *
  **********************************************************************************************************************/
 
-#ifndef Dio_IPC_CFG_H
-#define Dio_IPC_CFG_H
+#ifndef DIO_IPC_CFG_H
+#define DIO_IPC_CFG_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -27,14 +27,6 @@ extern "C" {
 /***********************************************************************************************************************
  *                                                     INCLUDES 
  **********************************************************************************************************************/
-
-[!IF "var:defined('postBuildVariant')"!][!//
-[!LOOP "variant:all()"!][!//
-#include "Dio_Ipc_[!"."!]_PB.h"
-[!ENDLOOP!][!//
-[!ELSE!][!//
-#include "Dio_Ipc_PB.h"
-[!ENDIF!]
 
 #include "Dio_Ipc_Types.h"
 
@@ -45,9 +37,9 @@ extern "C" {
 /**
  * @brief   Definition of software version number about Dio IPC config at IPC layer.
  */
-#define Dio_IPC_CFG_SW_MAJOR_VERSION        1U
-#define Dio_IPC_CFG_SW_MINOR_VERSION        0U
-#define Dio_IPC_CFG_SW_PATCH_VERSION        0U
+#define DIO_IPC_CFG_SW_MAJOR_VERSION        1U
+#define DIO_IPC_CFG_SW_MINOR_VERSION        0U
+#define DIO_IPC_CFG_SW_PATCH_VERSION        0U
 
 /***********************************************************************************************************************
  *                                                 FILE VERSION CHECK
@@ -56,127 +48,47 @@ extern "C" {
 /***********************************************************************************************************************
  *                                                   LOCAL MACROS
  **********************************************************************************************************************/
-
-/**
- * @brief   Definition of Dio external configure at IP Controller layer.
+ 
+ /**
+ * @brief  Definition for Dio configure at IP layer.
  */
-#define Dio_IPC_CONFIG_EXT \
-[!IF "var:defined('postBuildVariant')"!][!//
-[!LOOP "variant:all()"!][!//
-        Dio_IPC_CONFIG_[!"."!]_PB \
-[!ENDLOOP!][!//
-[!ELSE!][!//
-        Dio_IPC_CONFIG_PB
-[!ENDIF!]
-
-
-
-/**
-* @brief    Ip Instance ID of the Dio driver.
-*/
-#define Dio_IPC_INSTANCE          ((uint8)0x00)
-
+#define DIO_IPC_CONFIG_PC \
+                    extern const Dio_Ipc_ConfigType Dio_Ipc_g_c_Config;
 
 /**
  * @brief   Enable or Disable Development Error Detection.
  */
-#define Dio_IPC_DEV_ERROR_DETECT           [!IF "DioGeneral/DioDevErrorDetect"!][!WS "8"!](STD_ON)[!ELSE!][!WS "4"!](STD_OFF)[!ENDIF!]
+#define DIO_IPC_DEV_ERROR_DETECT    [!IF "DioGeneral/DioDevErrorDetect"!][!WS "8"!]STD_ON[!ELSE!]STD_OFF[!ENDIF!]
 
 
 /**
- * @brief   Enable or Disable Dio driver Pre-Compile configuration.
+ * @brief  Enable or disable Dio_GetVersionInfo API function.
  */
-[!IF "IMPLEMENTATION_CONFIG_VARIANT='VariantPreCompile' and variant:size()<=1"!][!//
-#define Dio_IPC_PRECOMPILE_SUPPORT     (STD_ON)
-[!ELSE!][!//
-#define Dio_IPC_PRECOMPILE_SUPPORT     (STD_OFF)
-[!ENDIF!][!//
-
-[!NOCODE!]
-    [!VAR "DioEcucPartitionRefCount" = "num:i(count(as:modconf('Dio')[1]/DioGeneral/DioEcucPartitionRef/*))"!]
-    [!IF "$DioEcucPartitionRefCount != 0 "!]
-        [!VAR "DioEcucPartitionRefNum" = "$DioEcucPartitionRefCount"!]
-        [!IF "(IMPLEMENTATION_CONFIG_VARIANT !='VariantPostBuild' and (variant:size()<=1))"!][!//
-            [!VAR "maxPartition" = "0"!]
-            [!LOOP "./DioGeneral/DioEcucPartitionRef/*"!]
-                [!VAR "DioCrtPart" = "node:value(.)"!]
-                [!LOOP "as:modconf('Os')[1]/OsApplication/*"!]
-                    [!IF "$DioCrtPart = node:value(./OsAppEcucPartitionRef)"!]
-                        [!SELECT "node:ref(./OsApplicationCoreRef)"!]
-                            [!IF "$maxPartition < node:value(./EcucCoreId)"!]
-                                [!VAR "maxPartition" = "node:value(./EcucCoreId)"!]
-                            [!ENDIF!]
-                        [!ENDSELECT!]
-                    [!ENDIF!]
-                [!ENDLOOP!]
-            [!ENDLOOP!]
-        [!ELSE!]
-            [!VAR "maxPartition" = "0"!]
-            [!LOOP "as:modconf('Os')[1]/OsApplication/*"!]
-                [!SELECT "node:ref(./OsApplicationCoreRef)"!]
-                    [!IF "$maxPartition < node:value(./EcucCoreId)"!]
-                        [!VAR "maxPartition" = "node:value(./EcucCoreId)"!]
-                    [!ENDIF!]
-                [!ENDSELECT!]
-            [!ENDLOOP!]
-        [!ENDIF!]
-    [!ELSE!]
-        [!VAR "maxPartition" = "0"!]
-    [!ENDIF!]
-[!ENDNOCODE!]
-/**
- * @brief    Number of configured partitions
- */
-#define Dio_IPC_MAX_PARTITIONS                    [!WS "4"!]([!"num:i($maxPartition + 1)"!]U)
+#define DIO_IPC_VERSION_INFO_API    [!IF "DioGeneral/DioVersionInfoApi"!][!WS "8"!]STD_ON[!ELSE!][!WS "4"!]STD_OFF[!ENDIF!]
 
 
 /**
- * @brief    Enable or disable multi-core features.
+ * @brief  Enable or disable Dio_FlipChannel API function.
  */
-#define Dio_IPC_MULTICORE_SUPPORT                 [!IF "DioGeneral/DioMulticoreSupport"!][!WS "4"!](STD_ON)[!ELSE!][!WS "4"!](STD_OFF)[!ENDIF!]
+#define DIO_IPC_FLIP_CHANNEL_API    [!IF "DioGeneral/DioFlipChannelApi"!][!WS "8"!]STD_ON[!ELSE!][!WS "4"!]STD_OFF[!ENDIF!]
 
 
 /**
- * @brief    Enable or disable user mode features.
+ * @brief  Enable or disable DioMaskedWritePort API function.
  */
-#define Dio_IPC_USERMODE_SUPPORT                 [!IF "DioGeneral/DioEnableUserModeSupport"!][!WS "4"!](STD_ON)[!ELSE!][!WS "4"!](STD_OFF)[!ENDIF!]
-
-
-[!IF "node:value(DioGeneral/DioErrorIsrNotificationEnable) = 'true'"!]
-/**
- *@brief    The callout configured by the user for Dio notifications.
- */
-#define Dio_IPC_ERROR_ISR_NOTIFICATION(para_ErrorCode_u8)   [!WS "4"!]([!"normalize-space(DioGeneral/DioErrorNotification)"!](para_ErrorCode_u8))
-[!ENDIF!]
+#define DIO_IPC_MASKEDWRITEPORT_API [!IF "DioGeneral/DioMaskedWritePortApi"!][!WS "8"!]STD_ON[!ELSE!][!WS "4"!]STD_OFF[!ENDIF!]
 
 
 /**
- *@brief    Maximum number of Dio configurations.
+ * @brief  Enable or disable Dio_ReadZeroForUndefinedPortPins API function.
  */
-[!NOCODE!]
-[!VAR "MaxNumberClockDioCFG" = "0"!]
-    [!VAR "MaxNumberClockDioCFG" = "num:i(count(DioConfigSet/DioConfig/*))"!]
-[!ENDNOCODE!]
-#define Dio_IPC_MAX_CONFIGSET   [!WS "4"!]((uint32)[!"num:i($MaxNumberClockDioCFG)"!]U)
+#define DIO_IPC_READZERO_UNDEFINEDPORTS [!IF "DioGeneral/DioReadZeroForUndefinedPortPins"!][!WS "8"!]STD_ON[!ELSE!][!WS "4"!]STD_OFF[!ENDIF!]
 
 
 /**
- *@brief    Pre-processor switch to enable/disable the API Dio_VersionInfoApi.
+ * @brief  Enable/Disable multicore function from the driver
  */
-#define Dio_IPC_GETVERSION_INFO_API           [!WS "4"!][!IF "DioGeneral/DioVersionInfoApi = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
-
-
-/**
- *@brief    Pre-processor switch to enable/disable DioEnableInterrupt.
- */
-#define Dio_IPC_ENABLE_INTERRUPT           [!WS "4"!][!IF "DioGeneral/DioEnableInterrupt = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
-
-
-/**
- *@brief    Pre-processor switch to enable/disable DioDmaEnable.
- */
-#define Dio_IPC_ENABLE_DMA           [!WS "4"!][!IF "DioGeneral/DioDmaEnable = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
-
+#define DIO_IPC_MULTICORE_ENABLED          [!IF "DioGeneral/DioMulticoreSupport"!][!WS "8"!]STD_ON[!ELSE!][!WS "4"!]STD_OFF[!ENDIF!]
 
 /***********************************************************************************************************************
  *                                       LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
@@ -215,7 +127,7 @@ extern "C" {
 }
 #endif
 
-#endif /* Dio_IPC_CFG_H */
+#endif /* DIO_IPC_CFG_H */
 
 /*--------------------------------------------------- End Of File -----------------------------------------------------*/
 [!ENDCODE!][!//

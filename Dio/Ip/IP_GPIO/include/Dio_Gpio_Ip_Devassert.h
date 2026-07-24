@@ -1,9 +1,9 @@
 /***********************************************************************************************************************
  * Project Name: HuLa STM
  * 
- * File Name: Dio_Ipc.h
+ * File Name: Dio_Gpio_Ip_Devassert.h
  *
- * Description: Implementation of Dio_Ipc IPC Level layer
+ * Description: Implementation of Dio_Ip_Devassert IP Level layer
  *              
  * AutoSAR Version:         4.4.0
  *
@@ -15,24 +15,28 @@
  *
  **********************************************************************************************************************/
 
-#ifndef DIO_IPC_H
-#define DIO_IPC_H
+#ifndef DIO_GPIO_IP_DEVASSERT_H
+#define DIO_GPIO_IP_DEVASSERT_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 /***********************************************************************************************************************
- *                                                     INCLUDES 
+ *                                                     INCLUDES  
  **********************************************************************************************************************/
-
-#include "Dio_Gpio_Ip.h"
-#include "Dio_Ipc_Cfg.h"
-
+#include "Common.h"
 /***********************************************************************************************************************
  *                                                 SOURCE FILE VERSION
  **********************************************************************************************************************/
-
+#define DIO_IP_DEVASSERT_VENDOR_ID                    15
+#define DIO_IP_DEVASSERT_MODULE_ID                    120
+#define DIO_IP_DEVASSERT_AR_RELEASE_MAJOR_VERSION     4
+#define DIO_IP_DEVASSERT_AR_RELEASE_MINOR_VERSION     4
+#define DIO_IP_DEVASSERT_AR_RELEASE_REVISION_VERSION  0
+#define DIO_IP_DEVASSERT_SW_MAJOR_VERSION             1
+#define DIO_IP_DEVASSERT_SW_MINOR_VERSION             0
+#define DIO_IP_DEVASSERT_SW_PATCH_VERSION             0
 /***********************************************************************************************************************
  *                                                 FILE VERSION CHECK
  **********************************************************************************************************************/
@@ -41,15 +45,26 @@ extern "C" {
  *                                                   LOCAL MACROS
  **********************************************************************************************************************/
 
-#define START_CONFIG_DATA_UNSPECIFIED
-#include "MemMap.h"
-    DIO_IPC_CONFIG_PC
-#define STOP_CONFIG_DATA_UNSPECIFIED
-#include "MemMap.h"
-
 /***********************************************************************************************************************
  *                                       LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
  **********************************************************************************************************************/
+
+#if ((MCAL_PLATFORM_ARM == MCAL_ARM_AARCH64) || (MCAL_PLATFORM_ARM == MCAL_ARM_AARCH32))
+    #define BREAKPOINT_INSTR        "HLT #0"
+#elif (MCAL_PLATFORM_ARM == MCAL_ARM_MARCH)
+    #define BREAKPOINT_INSTR        "BKPT #0"
+#else
+    #error "Unsupported architecture!"
+#endif
+
+/* Implement default assert macro */
+static inline void Dio_DevAssert(volatile boolean x);
+static inline void Dio_DevAssert(volatile boolean x)
+{
+    if(x) { } else { for(;;) {ASM_KEYWORD(BREAKPOINT_INSTR);} }
+}
+
+#define DIO_IP_DEV_ASSERT(x) Dio_DevAssert(x)
 
 /***********************************************************************************************************************
  *                                                      EXTERN
@@ -84,6 +99,6 @@ extern "C" {
 }
 #endif
 
-#endif /* DIO_IPC_H */
+#endif /* DIO_GPIO_IP_DEVASSERT_H */
 
 /*--------------------------------------------------- EOF ------------------------------------------------------------*/

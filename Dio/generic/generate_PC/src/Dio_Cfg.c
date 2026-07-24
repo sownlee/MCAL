@@ -1,9 +1,11 @@
+[!CODE!][!//
+[!AUTOSPACING!]
 /***********************************************************************************************************************
  * Project Name: HuLa STM
  * 
- * File Name: Dio_Ipc.h
+ * File Name: Dio_Cfg.c
  *
- * Description: Implementation of Dio_Ipc IPC Level layer
+ * Description: Implementation of Dio_Cfg High Level layer
  *              
  * AutoSAR Version:         4.4.0
  *
@@ -15,23 +17,27 @@
  *
  **********************************************************************************************************************/
 
-#ifndef DIO_IPC_H
-#define DIO_IPC_H
-
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 /***********************************************************************************************************************
- *                                                     INCLUDES 
+ *                                                     INCLUDES
  **********************************************************************************************************************/
 
-#include "Dio_Gpio_Ip.h"
-#include "Dio_Ipc_Cfg.h"
+#include "Dio.h"
 
 /***********************************************************************************************************************
  *                                                 SOURCE FILE VERSION
  **********************************************************************************************************************/
+
+#define DIO_VENDOR_ID_CFG_C                   15
+#define DIO_AR_RELEASE_MAJOR_VERSION_CFG_C    4
+#define DIO_AR_RELEASE_MINOR_VERSION_CFG_C    4
+#define DIO_AR_RELEASE_REVISION_VERSION_CFG_C 0
+#define DIO_SW_MAJOR_VERSION_CFG_C            1
+#define DIO_SW_MINOR_VERSION_CFG_C            0
+#define DIO_SW_PATCH_VERSION_CFG_C            0
 
 /***********************************************************************************************************************
  *                                                 FILE VERSION CHECK
@@ -40,19 +46,26 @@ extern "C" {
 /***********************************************************************************************************************
  *                                                   LOCAL MACROS
  **********************************************************************************************************************/
-
 #define START_CONFIG_DATA_UNSPECIFIED
 #include "MemMap.h"
-    DIO_IPC_CONFIG_PC
+
+/**
+ *   @brief  Data structure containing the initialization data for the Dio Driver.
+ */
+const Dio_ConfigType Dio_g_c_Config =
+{
+    /* Pointer to the Ipc pointer configuration */
+    &Dio_Ipc_g_c_Config [!CR!]
+};
+
 #define STOP_CONFIG_DATA_UNSPECIFIED
 #include "MemMap.h"
-
 /***********************************************************************************************************************
- *                                       LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
+ *                                                      EXTERN
  **********************************************************************************************************************/
 
 /***********************************************************************************************************************
- *                                                      EXTERN
+ *                                       LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
  **********************************************************************************************************************/
 
 /***********************************************************************************************************************
@@ -84,6 +97,5 @@ extern "C" {
 }
 #endif
 
-#endif /* DIO_IPC_H */
-
 /*--------------------------------------------------- EOF ------------------------------------------------------------*/
+[!ENDCODE!][!//

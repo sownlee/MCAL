@@ -1,9 +1,9 @@
 /***********************************************************************************************************************
  * Project Name: HuLa STM
  * 
- * File Name: Dio_Ipc.h
+ * File Name: Dio_Gpio_Ip_Types.h
  *
- * Description: Implementation of Dio_Ipc IPC Level layer
+ * Description: Implementation of Dio_Gpio_Ip_Types IP Level layer
  *              
  * AutoSAR Version:         4.4.0
  *
@@ -15,8 +15,8 @@
  *
  **********************************************************************************************************************/
 
-#ifndef DIO_IPC_H
-#define DIO_IPC_H
+#ifndef DIO_GPIO_IP_TYPES_H
+#define DIO_GPIO_IP_TYPES_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -26,8 +26,8 @@ extern "C" {
  *                                                     INCLUDES 
  **********************************************************************************************************************/
 
-#include "Dio_Gpio_Ip.h"
-#include "Dio_Ipc_Cfg.h"
+#include "Std_Types.h"
+#include "Dio_Gpio_Ip_Devassert.h"
 
 /***********************************************************************************************************************
  *                                                 SOURCE FILE VERSION
@@ -41,15 +41,56 @@ extern "C" {
  *                                                   LOCAL MACROS
  **********************************************************************************************************************/
 
-#define START_CONFIG_DATA_UNSPECIFIED
-#include "MemMap.h"
-    DIO_IPC_CONFIG_PC
-#define STOP_CONFIG_DATA_UNSPECIFIED
-#include "MemMap.h"
-
 /***********************************************************************************************************************
  *                                       LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
  **********************************************************************************************************************/
+
+
+/**
+ * @brief  Type of a DIO channel representation.
+ */
+typedef uint16 Dio_Gpio_Ip_ChannelType_u16;
+
+/**
+ * @brief  Type of a DIO channel levels representation.
+ */
+typedef uint8 Dio_Gpio_Ip_LevelType_u8;
+
+/**
+ * @brief  Type of a DIO port representation.
+ */
+typedef uint8 Dio_Gpio_Ip_PortType_u8;
+
+/**
+ * @brief   Type of a DIO port levels representation.
+ */
+typedef uint16 Dio_Gpio_Ip_PortLevelType_u16;
+
+/**
+ * @brief   Type for the definition of a channel group, which consists of several adjoining channels within a port
+ * @details SRS ID:    SWS_Dio_HuLa_XXXXX
+ *          Design ID: Dio_Gpio_Ip_ChannelGroupType_Class     
+ */
+typedef struct 
+{
+    Dio_Gpio_Ip_PortType_u8            Dio_Gpio_Ip_port;         /* This is the port address offset on which the channel group works. */
+    uint8                              Dio_Gpio_Ip_offset_u8;    /* This is the position of the channel group on the port counted from the LSB */
+    Dio_Gpio_Ip_PortLevelType_u16      Dio_Gpio_Ip_mask;         /* This is the mask which defines the positions of the channel group */
+} Dio_Gpio_Ip_ChannelGroupType;
+
+/**
+ * @brief   Type of the external data structure containing the initialization data for this module.
+ * @details SRS ID:    SWS_Dio_HuLa_XXXXX
+ *          Design ID: Dio_Gpio_Ip_ConfigType_Class
+ */
+typedef struct
+{
+    uint8 NumChannelGroups_u8;                                                  /* Number of channel groups in configuration */
+    const Dio_Gpio_Ip_ChannelGroupType *Dio_Gpio_Ip_c_ChannelGroupList_ptr;     /* Pointer to list of channel groups in configuration */
+    const uint32 *Dio_Gpio_Ip_c_ChannelToPartitionMap_u32_ptr;                  /* Pointer to channel to partition mapping */
+    const uint32 *Dio_Gpio_Ip_c_PortToPartitionMap_u32_ptr;                     /* Pointer to port to partition mapping */
+} Dio_Gpio_Ip_ConfigType;
+
 
 /***********************************************************************************************************************
  *                                                      EXTERN
@@ -84,6 +125,6 @@ extern "C" {
 }
 #endif
 
-#endif /* DIO_IPC_H */
+#endif /* DIO_GPIO_IP_TYPES_H */
 
-/*--------------------------------------------------- EOF ------------------------------------------------------------*/
+/*--------------------------------------------------- EOF -----------------------------------------------------*/
